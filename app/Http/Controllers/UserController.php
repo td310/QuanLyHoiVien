@@ -42,12 +42,13 @@ class UserController extends Controller
 
     public function update(ProfileRequest $request, string $id)
     {
-        if ($this->userService->updateUser($id, $request->validated())) {
-            return redirect()->route('profile')->with('success', 'Cập nhật thông tin thành công');
+        if ($request->hasFile('image')) {
+            if ($this->userService->updateAvatar($id, $request->file('image'))) {
+                return redirect()->back()->with('success', 'Cập nhật ảnh đại diện thành công');
+            }
         }
-        return back()->with('error', 'Cập nhật thông tin thất bại');
+        return back()->with('error', 'Cập nhật ảnh đại diện thất bại');
     }
-
     public function destroy(string $id)
     {
         //

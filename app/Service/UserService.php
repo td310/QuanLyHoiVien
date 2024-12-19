@@ -56,18 +56,24 @@ class UserService
         return $user;
     }
 
-    public function updateUser($id, $data)
+    public function updateAvatar($id, $image)
     {
         $user = User::find($id);
-        if ($user) {
-            $user->update([
-                'name' => $data['name'],
-                'phone' => $data['phone'],
-                'password' => $data['password']
-            ]);
-            return true;
+    
+        if ($image) {
+            if ($image) {
+                $user->clearMediaCollection('avatar');
+                $user->addMedia($image)
+                    ->preservingOriginal()
+                    ->toMediaCollection('avatar');
+                return true;
+            }
         }
-        return false;
+    }
+    
+    public function getUserAvatar($user)
+    {
+        return $user->getFirstMediaUrl('avatar');
     }
 
     public function handleForgotPassword($email)
