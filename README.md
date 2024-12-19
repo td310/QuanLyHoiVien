@@ -9,7 +9,7 @@
 
 <h2 align="left">Video</h2>
 <p align="left">Hồ sơ người dùng. </p>
-https://github.com/user-attachments/assets/3fd043fb-823c-4bae-8f27-eb1540a9b4c5
+<p align="left">https://github.com/user-attachments/assets/3fd043fb-823c-4bae-8f27-eb1540a9b4c5 </p>
 
 <p align="left">CRUD Ban chấp hành </p>
 https://github.com/user-attachments/assets/572335d4-2e80-489c-bcf6-2a41d70f9467
