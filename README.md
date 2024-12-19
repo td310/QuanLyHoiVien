@@ -3,7 +3,9 @@
 
 <h2 align="left">Báo cáo 19/12/2024</h2>
 <p align="left">• Chức năng: CRUD Ban chấp hành (Khách hàng & hội viên), cập nhật hồ sơ người dùng. </p>
-<p align="left">• Hồ sơ người dùng: Sử dụng thư viện Spatie Media để lưu ảnh người dùng. </p>
+<p align="left">• Hồ sơ người dùng: Cập nhật thêm ảnh người dùng. </p>
+<p align="left">• Lưu trữ ảnh: Sử dụng thư viện Spatie Media để lưu trữ ảnh hoặc file. </p>
+
 
 <h2 align="left">Video</h2>
 <p align="left">Hồ sơ người dùng. </p>
