@@ -8,11 +8,10 @@ use App\Service\CommitteeService;
 
 class CommitteeController extends Controller
 {
-    protected $committeeService;
-
-    public function __construct(CommitteeService $committeeService)
-    {
-        $this->committeeService = $committeeService;
+    public function __construct(
+        protected CommitteeService $committeeService
+    ) {
+        //
     }
 
     public function index()
@@ -20,7 +19,6 @@ class CommitteeController extends Controller
         $committees = $this->committeeService->getAllCommittees();
         return view('customer_partner.index', compact('committees'));
     }
-
 
     public function create()
     {
@@ -45,7 +43,7 @@ class CommitteeController extends Controller
         $committee = $this->committeeService->getCommitteeById($id);
         return view('customer_partner.edit', compact('committee'));
     }
-    
+
 
     public function update(CommitteeRequest $request, string $id)
     {
@@ -59,5 +57,11 @@ class CommitteeController extends Controller
         $this->committeeService->deleteCommittee($id);
         return redirect()->route('index.customer_partner')
             ->with('success', 'Xóa thành công');
+    }
+
+    public function fees(string $id)
+    {
+        $committee = $this->committeeService->getCommitteeWithFees($id);
+        return view('customer_partner.committee_fee', compact('committee'));
     }
 }

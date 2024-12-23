@@ -108,17 +108,18 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.customer_partner') }}"
-                                        class="nav-link {{ Route::is('index.customer_partner') ? 'active' : '' }}">
+                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'customer_partner') ? 'active' : '' }}">
                                         <p>Khách hàng & Đối tác</p>
                                     </a>
-                                </li>
+                                </li>                                
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <p>Hoạt động</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('index.membership_fee')}}" 
+                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'membership_fee') ? 'active' : '' }}">
                                         <p>Hội Phí</p>
                                     </a>
                                 </li>

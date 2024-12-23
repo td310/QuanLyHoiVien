@@ -23,10 +23,11 @@
                         <div class="card">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">
-                                    <a href="{{ route('create.customer_partner') }}" class="float-right btn btn-success btn-sm">Tạo mới</a>
+                                    <a href="{{ route('create.customer_partner') }}"
+                                        class="float-right btn btn-success btn-sm">Tạo mới</a>
                                 </h6>
                             </div>
-                            <!-- /.card-header -->
+                    
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
@@ -51,25 +52,37 @@
                                                 <td>{{ $committee->unit }}</td>
                                                 <td>{{ $committee->position }}</td>
                                                 <td>
-                                                    @if($committee->status == 'active')
+                                                    @if ($committee->status == 'active')
                                                         <span class="badge badge-success">Hoạt động</span>
                                                     @else
                                                         <span class="badge badge-danger">Không hoạt động</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('edit.customer_partner', $committee->id) }}" 
-                                                       class="btn btn-primary btn-sm">Sửa</a>
-                                                    <a href="{{ route('show.customer_partner', $committee->id) }}" 
-                                                       class="btn btn-info btn-sm">Chi tiết</a>
-                                                    <form action="{{ route('delete.customer_partner', $committee->id) }}" 
-                                                          method="POST" 
-                                                          class="d-inline"
-                                                          onsubmit="return confirm('Bạn có chắc muốn xóa?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                                    </form>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary btn-sm" type="button" id="dropdownMenuButton{{ $committee->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $committee->id }}">
+                                                            <a class="dropdown-item" href="{{ route('edit.customer_partner', $committee->id) }}">
+                                                                <i class="fas fa-edit"></i> Sửa
+                                                            </a>
+                                                            <a class="dropdown-item" href="{{ route('show.customer_partner', $committee->id) }}">
+                                                                <i class="fas fa-info-circle"></i> Chi tiết
+                                                            </a>
+                                                            <a class="dropdown-item" href="{{ route('fees.customer_partner', $committee->id) }}">
+                                                                <i class="fas fa-history"></i> Lịch sử hội phí
+                                                            </a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <form action="{{ route('delete.customer_partner', $committee->id) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                                                    <i class="fas fa-trash"></i> Xóa
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @empty

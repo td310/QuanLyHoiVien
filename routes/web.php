@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommitteeController;
+use App\Http\Controllers\MemFeeController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -38,8 +39,19 @@ Route::prefix('customer-partner')->group(function () {
     Route::get('/create', [CommitteeController::class, 'create'])->name('create.customer_partner');
     Route::get('/edit/{id}', [CommitteeController::class, 'edit'])->name('edit.customer_partner');
     Route::get('/show/{id}', [CommitteeController::class, 'show'])->name('show.customer_partner');
+    Route::get('/fees/{id}', [CommitteeController::class, 'fees'])->name('fees.customer_partner');
 
     Route::post('/store', [CommitteeController::class, 'store'])->name('store.customer_partner');
     Route::delete('/delete/{id}', [CommitteeController::class, 'destroy'])->name('delete.customer_partner');
     Route::put('/update/{id}', [CommitteeController::class, 'update'])->name('update.customer_partner');
+});
+
+Route::prefix('membership-fee')->group(function () {
+    Route::get('/', [MemFeeController::class, 'index'])->name('index.membership_fee');
+    Route::get('/create', [MemFeeController::class, 'create'])->name('create.membership_fee');
+    Route::get('/show/{id}', [MemFeeController::class, 'show'])->name('show.membership_fee');
+
+    Route::post('/store', [MemFeeController::class, 'store'])->name('membership_fee.store');
+    Route::post('/pay/{id}', [MemFeeController::class, 'pay'])->name('pay.membership_fee');
+    Route::delete('/delete/{id}', [MemFeeController::class, 'destroy'])->name('delete.membership_fee');
 });
