@@ -73,6 +73,9 @@
                                                             <a class="dropdown-item" href="{{ route('fees.customer_partner', $committee->id) }}">
                                                                 <i class="fas fa-history"></i> Lịch sử hội phí
                                                             </a>
+                                                            <a class="dropdown-item" href="{{ route('sponsorships.customer_partner', $committee->id) }}">
+                                                                <i class="fas fa-history"></i> Lịch sử tài trợ
+                                                            </a>
                                                             <div class="dropdown-divider"></div>
                                                             <form action="{{ route('delete.customer_partner', $committee->id) }}" method="POST" class="d-inline">
                                                                 @csrf

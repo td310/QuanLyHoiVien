@@ -64,4 +64,10 @@ class CommitteeController extends Controller
         $committee = $this->committeeService->getCommitteeWithFees($id);
         return view('customer_partner.committee_fee', compact('committee'));
     }
+
+    public function sponsorships(string $id)
+    {
+        $committee = $this->committeeService->getCommitteeWithSponsorship($id);
+        return view('customer_partner.sponsorship', compact('committee'));
+    }
 }

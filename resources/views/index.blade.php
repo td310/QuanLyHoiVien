@@ -111,21 +111,22 @@
                                         class="nav-link {{ str_contains(Route::currentRouteName(), 'customer_partner') ? 'active' : '' }}">
                                         <p>Khách hàng & Đối tác</p>
                                     </a>
-                                </li>                                
+                                </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <p>Hoạt động</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('index.membership_fee')}}" 
+                                    <a href="{{ route('index.membership_fee') }}"
                                         class="nav-link {{ str_contains(Route::currentRouteName(), 'membership_fee') ? 'active' : '' }}">
                                         <p>Hội Phí</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <p>Tài Trợ</p>
+                                    <a href="{{ route('index.sponsorship') }}"
+                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'sponsorship') && !str_contains(Route::currentRouteName(), 'customer_partner') ? 'active' : '' }}">
+                                        <p>Tài trợ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -168,6 +169,7 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('css/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('css/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -207,7 +209,7 @@
             const imageUpload = document.getElementById('image-upload');
             const previewImage = document.getElementById('preview-image');
             const avatarForm = document.getElementById('avatar-form');
-            
+
             if (imageUpload && previewImage) {
                 imageUpload.addEventListener('change', function(e) {
                     const file = e.target.files[0];
@@ -221,7 +223,7 @@
                     }
                 });
             }
-            
+
             function togglePassword() {
                 const passwordInput = document.getElementById('password');
                 const toggleIcon = document.getElementById('togglePassword');

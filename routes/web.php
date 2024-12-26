@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\MemFeeController;
+use App\Http\Controllers\SponsorshipController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -40,6 +41,7 @@ Route::prefix('customer-partner')->group(function () {
     Route::get('/edit/{id}', [CommitteeController::class, 'edit'])->name('edit.customer_partner');
     Route::get('/show/{id}', [CommitteeController::class, 'show'])->name('show.customer_partner');
     Route::get('/fees/{id}', [CommitteeController::class, 'fees'])->name('fees.customer_partner');
+    Route::get('/sponsorships/{id}', [CommitteeController::class, 'sponsorships'])->name('sponsorships.customer_partner');
 
     Route::post('/store', [CommitteeController::class, 'store'])->name('store.customer_partner');
     Route::delete('/delete/{id}', [CommitteeController::class, 'destroy'])->name('delete.customer_partner');
@@ -54,4 +56,13 @@ Route::prefix('membership-fee')->group(function () {
     Route::post('/store', [MemFeeController::class, 'store'])->name('membership_fee.store');
     Route::post('/pay/{id}', [MemFeeController::class, 'pay'])->name('pay.membership_fee');
     Route::delete('/delete/{id}', [MemFeeController::class, 'destroy'])->name('delete.membership_fee');
+});
+
+Route::prefix('sponsorship')->group(function () {
+    Route::get('/', [SponsorshipController::class, 'index'])->name('index.sponsorship');
+    Route::get('/create', [SponsorshipController::class, 'create'])->name('create.sponsorship');
+    Route::get('/show/{id}', [SponsorshipController::class, 'show'])->name('show.sponsorship');
+
+    Route::post('/store', [SponsorshipController::class, 'store'])->name('store.sponsorship');
+    Route::delete('/delete/{id}', [SponsorshipController::class, 'destroy'])->name('delete.sponsorship');
 });

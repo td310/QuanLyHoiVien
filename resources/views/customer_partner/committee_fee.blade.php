@@ -10,7 +10,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('index.customer_partner') }}">Ban chấp hành</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index.customer_partner') }}">Ban chấp hành</a>
+                            </li>
                             <li class="breadcrumb-item active">Hội Phí</li>
                         </ol>
                     </div>
@@ -21,6 +22,50 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                        <div class="card card-primary card-outline col-md-6">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <strong>Tên thành viên</strong>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>{{ $committee->committee_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <strong>Email</strong>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>{{ $committee->email }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <strong>Tình trạng hoạt động</strong>
+                                            </div>
+                                            <div class="col-md-8">
+                                                @if ($committee->status == 'active')
+                                                    <p class="badge badge-success">Hoạt động</p>
+                                                @else
+                                                    <p class="badge badge-danger">Không hoạt động</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <strong>Tổng hội phí</strong>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>{{ format_money($committee->total_debt) }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -50,10 +95,10 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($memFee->getFirstMedia('memfee_attachments'))
-                                                        <a href="{{ $memFee->getFirstMedia('memfee_attachments')->getUrl() }}" 
-                                                           target="_blank" 
-                                                           style="font-style: italic; text-decoration: underline;">
+                                                    @if ($memFee->getFirstMedia('memfee_attachments'))
+                                                        <a href="{{ $memFee->getFirstMedia('memfee_attachments')->getUrl() }}"
+                                                            target="_blank"
+                                                            style="font-style: italic; text-decoration: underline;">
                                                             Xem file đính kèm
                                                         </a>
                                                     @else

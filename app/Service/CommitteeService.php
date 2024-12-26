@@ -83,4 +83,12 @@ class CommitteeService
             $query->latest();
         }])->findOrFail($id);
     }
+
+    public function getCommitteeWithSponsorship($id)
+    {
+        return Committees::with(['sponsorships' => function ($query) {
+            $query->latest();
+        }])->findOrFail($id);
+    }
+
 }

@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Committees;
 use App\Service\MemFeeService;
 use App\Http\Requests\MemFeeRequest;
 
 class MemFeeController extends Controller
 {
-    protected $memFeeService;
-
-    public function __construct(MemFeeService $memFeeService)
+    public function __construct(protected MemFeeService $memFeeService)
     {
-        $this->memFeeService = $memFeeService;
+        //
     }
 
     public function index()

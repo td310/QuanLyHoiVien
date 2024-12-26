@@ -31,10 +31,27 @@ class Committees extends Model implements HasMedia
         return $this->hasMany(MemFee::class, 'committee_id');
     }
 
+    public function sponsorships()
+    {
+        return $this->hasMany(Sponsorship::class, 'committee_id');
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('committee_image')
             ->singleFile();
     }
+
+    public function getTotalDebtAttribute()
+    {
+        return $this->memFees()->sum('debt');
+    }
+
+    public function getTotalSponsorshipAttribute()
+    {
+        return $this->sponsorships()->sum('total');
+    }
+
+
 }
 
