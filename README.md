@@ -2,7 +2,7 @@
 <p align="left"> https://drive.google.com/file/d/1hsa6EmTlHrGgnTRRpoiwvJdj8QWc2FU3/view?usp=sharing</p>
 
 <h2 align="left">Báo cáo 26/12/2024</h2>
-<p align="left">• Database: Cập nhật table "Thông báo" </p>
+<p align="left">• Database: Thêm table "Thông báo" </p>
 <p align="left">• Chức năng: Thêm, xem chi tiết, xóa Tài trợ. </p>
 
 
