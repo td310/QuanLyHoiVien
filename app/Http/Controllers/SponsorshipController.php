@@ -15,9 +15,12 @@ class SponsorshipController extends Controller
         //
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $sponsorships = $this->sponsorshipService->getSponsorshipsWithCommittee();
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $search = $request->search;
+        $sponsorships = $this->sponsorshipService->getSponsorshipsWithCommittee($startDate, $endDate, $search);
         return view('sponsorship.index', compact('sponsorships'));
     }
 

@@ -55837,4 +55837,10 @@ a.text-muted:hover {
     border-color: #4b545c !important
 }
 
+.select2-container--bootstrap-5 .select2-selection {
+    height: calc(1.8125rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: .875rem;
+    border-radius: 0.2rem;
+}
 /*# sourceMappingURL=adminlte.min.css.map */

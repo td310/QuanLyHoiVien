@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quản lí hội phí</h1>
+                        <h1>Lịch sử tài trợ</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -39,7 +39,44 @@
                             </div>
                         </div>
                         <div class="card">
-                            <!-- /.card-header -->
+                            <div class="d-flex align-items-center justify-content-between p-4">
+                                <form action="{{ route('sponsorships.customer_partner', $committee->id) }}" method="GET"
+                                    id="dateFilterForm">
+                                    <div class="left-section">
+                                        <label>Thời gian</label>
+                                        <div class="input-group" style="width: 400px;">
+                                            <input type="date" name="start_date" class="form-control"
+                                                value="{{ request()->start_date }}">
+                                            <div class="input-group-append input-group-prepend">
+                                                <span class="input-group-text">đến</span>
+                                            </div>
+                                            <input type="date" name="end_date" class="form-control"
+                                                value="{{ request()->end_date }}">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Search Form -->
+                                <div class="card-tools">
+                                    <form action="{{ route('sponsorships.customer_partner', $committee->id) }}"
+                                        method="GET" id="searchForm">
+                                        <div class="input-group input-group-sm" style="width: 200px;">
+                                            <input type="text" name="search" class="form-control float-right"
+                                                placeholder="Tìm kiếm..." value="{{ request()->search }}">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
@@ -78,7 +115,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="text-center">Không có dữ liệu</td>
+                                                <td colspan="7" class="text-center">Không có dữ liệu</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -95,4 +132,19 @@
             <!-- /.container-fluid -->
         </section>
     </div>
+    <script>
+        document.getElementById('dateFilterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const startDate = this.querySelector('[name="start_date"]').value;
+            const endDate = this.querySelector('[name="end_date"]').value;
+            window.location.href =
+                `{{ route('sponsorships.customer_partner', $committee->id) }}?start_date=${startDate}&end_date=${endDate}`;
+        });
+
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const search = this.querySelector('[name="search"]').value;
+            window.location.href = `{{ route('sponsorships.customer_partner', $committee->id) }}?search=${search}`;
+        });
+    </script>
 @endsection

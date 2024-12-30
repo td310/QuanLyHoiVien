@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\Committees;
+use App\Models\MemFee;
 
 class CommitteeService
 {
@@ -32,9 +33,26 @@ class CommitteeService
         return $committee;
     }
 
-    public function getAllCommittees()
+    public function getAllCommittees($status = null, $search = null)
     {
-        return Committees::latest()->get();
+        $query = Committees::query();
+        
+        if ($status) {
+            $query->where('status', $status);
+        }
+        
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('id_card', 'LIKE', "%{$search}%")
+                  ->orWhere('committee_name', 'LIKE', "%{$search}%")
+                  ->orWhere('email', 'LIKE', "%{$search}%")
+                  ->orWhere('unit', 'LIKE', "%{$search}%")
+                  ->orWhere('position', 'LIKE', "%{$search}%")
+                  ->orWhere('status', 'LIKE', "%{$search}%");
+            });
+        }
+        
+        return $query->latest()->paginate(6);
     }
 
     public function deleteCommittee($id)
@@ -77,18 +95,61 @@ class CommitteeService
         return $committee;
     }
 
-    public function getCommitteeWithFees($id)
+    public function getDistinctYears()
     {
-        return Committees::with(['memFees' => function ($query) {
+        return MemFee::selectRaw('YEAR(date) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+    }
+    
+    public function getCommitteeWithFees($id, $year = null, $search = null)
+    {
+        $committee = Committees::with(['memFees' => function ($query) use ($year, $search) {
+            if ($year) {
+                $query->whereYear('date', $year);
+            }
+            
+            if ($search) {
+                if (preg_match('/^\d{2}\/\d{2}$/', $search)) {
+                    $parts = explode('/', $search);
+                    $day = $parts[0];
+                    $month = $parts[1];
+                    
+                    $query->whereDay('date', $day)
+                          ->whereMonth('date', $month);
+                } else {
+                    $query->where(function($q) use ($search) {
+                        $q->whereYear('date', 'LIKE', "%{$search}%")
+                          ->orWhereMonth('date', 'LIKE', "%{$search}%")
+                          ->orWhereDay('date', 'LIKE', "%{$search}%")
+                          ->orWhere('date', 'LIKE', "%{$search}%");
+                    });
+                }
+            }
+            
             $query->latest();
         }])->findOrFail($id);
+    
+        return $committee;
     }
 
-    public function getCommitteeWithSponsorship($id)
+    public function getCommitteeWithSponsorship($id, $startDate = null, $endDate = null, $search = null)
     {
-        return Committees::with(['sponsorships' => function ($query) {
+        $committee = Committees::with(['sponsorships' => function ($query) use ($startDate, $endDate, $search){
+            if ($startDate && $endDate) {
+                $query->whereBetween('date', [$startDate, $endDate]);
+            }
+
+            if ($search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('product', 'LIKE', "%{$search}%")
+                    ->orWhere('unit', 'LIKE', "%{$search}%");
+                });
+            }
             $query->latest();
         }])->findOrFail($id);
-    }
 
+        return $committee;
+    }
 }

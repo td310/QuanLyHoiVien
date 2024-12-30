@@ -50,8 +50,30 @@ class MemFeeService
         return $memFee->delete();
     }
 
-    public function getMemFeesWithCommittee()
+    public function getMemFeesWithCommittee($startDate = null, $endDate = null, $status = null, $search = null)
     {
-        return MemFee::with('committee')->latest()->get();
+        $query = MemFee::with('committee');
+        
+        if ($startDate && $endDate) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        }
+    
+        if ($status) {
+            $query->where('status', $status);
+        }
+    
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->whereHas('committee', function($subQ) use ($search) {
+                    $subQ->where('committee_name', 'LIKE', "%{$search}%");
+                })
+                ->orWhere('description', 'LIKE', "%{$search}%")
+                ->orWhere('debt', 'LIKE', "%{$search}%")
+                ->orWhere('status', 'LIKE', "%{$search}%")
+                ->orWhere('date', 'LIKE', "%{$search}%");
+            });
+        }
+        
+        return $query->latest()->paginate(6);
     }
 }

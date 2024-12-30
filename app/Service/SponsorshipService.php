@@ -16,11 +16,29 @@ class SponsorshipService
             ->get();
     }
 
-    public function getSponsorshipsWithCommittee()
+    public function getSponsorshipsWithCommittee($startDate = null, $endDate = null, $search = null)
     {
-        return Sponsorship::with('committee')->latest()->get();
+        $query = Sponsorship::with('committee');
+        
+        if ($startDate && $endDate) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        }
+    
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->whereHas('committee', function($subQ) use ($search) {
+                    $subQ->where('committee_name', 'LIKE', "%{$search}%");
+                })
+                ->orWhere('product', 'LIKE', "%{$search}%")
+                ->orWhere('unit', 'LIKE', "%{$search}%")
+                ->orWhere('quantity', 'LIKE', "%{$search}%")
+                ->orWhere('total', 'LIKE', "%{$search}%");
+            });
+        }
+        
+        return $query->latest()->paginate(6);
     }
-
+    
     public function createSponsorship(array $data)
     {
         $sponsorship = Sponsorship::create([

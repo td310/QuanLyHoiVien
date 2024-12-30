@@ -14,9 +14,11 @@ class CommitteeController extends Controller
         //
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $committees = $this->committeeService->getAllCommittees();
+        $status = $request->query('status');
+        $search = $request->query('search');
+        $committees = $this->committeeService->getAllCommittees($status, $search);
         return view('customer_partner.index', compact('committees'));
     }
 
@@ -59,15 +61,21 @@ class CommitteeController extends Controller
             ->with('success', 'Xóa thành công');
     }
 
-    public function fees(string $id)
+    public function fees(Request $request, string $id)
     {
-        $committee = $this->committeeService->getCommitteeWithFees($id);
-        return view('customer_partner.committee_fee', compact('committee'));
+        $year = $request->year;
+        $search = $request->search;
+        $years = $this->committeeService->getDistinctYears();
+        $committee = $this->committeeService->getCommitteeWithFees($id, $year, $search);
+        return view('customer_partner.committee_fee', compact('committee', 'years'));
     }
 
-    public function sponsorships(string $id)
+    public function sponsorships(Request $request, string $id)
     {
-        $committee = $this->committeeService->getCommitteeWithSponsorship($id);
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $search = $request->search;
+        $committee = $this->committeeService->getCommitteeWithSponsorship($id, $startDate, $endDate, $search);
         return view('customer_partner.sponsorship', compact('committee'));
     }
 }

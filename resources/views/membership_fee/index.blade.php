@@ -18,14 +18,60 @@
         </section>
         <section class="content">
             <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-12 d-flex justify-content-end">
+                        <a href="{{ route('create.membership_fee') }}" class="btn btn-success btn-sm">
+                            <i class="fas fa-plus"></i> Tạo mới
+                        </a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">
-                                    <a href="{{ route('create.membership_fee') }}"
-                                        class="float-right btn btn-success btn-sm">Tạo mới</a>
-                                </h6>
+                            <div class="d-flex align-items-center justify-content-between p-4">
+                                <form action="{{ route('index.membership_fee') }}" method="GET">
+                                    <div class="left-section">
+                                        <label>Thời gian</label>
+                                        <div class="input-group" style="width: 400px;">
+                                            <input type="date" name="start_date" class="form-control"
+                                                value="{{ request()->start_date }}">
+                                            <div class="input-group-append input-group-prepend">
+                                                <span class="input-group-text">đến</span>
+                                            </div>
+                                            <input type="date" name="end_date" class="form-control"
+                                                value="{{ request()->end_date }}">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form action="{{ route('index.membership_fee') }}" method="GET">
+                                    <div class="left-section">
+                                        <label>Trạng thái</label>
+                                        <select name="status" class="form-control" style="width: 200px;" onchange="this.form.submit()">
+                                            <option value="">Tất cả</option>
+                                            <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Đã thanh toán</option>
+                                            <option value="unpaid" {{ request('status') == 'unpaid' ? 'selected' : '' }}>Chưa thanh toán</option>
+                                        </select>
+                                    </div>
+                                </form>
+
+                                <div class="card-tools">
+                                    <form action="{{ route('index.membership_fee') }}" method="GET">
+                                        <div class="input-group input-group-sm" style="width: 200px;">
+                                            <input type="text" name="search" class="form-control float-right"
+                                                placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -41,7 +87,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($memFees as $key => $memFee)
+                                        @forelse ($memFees as $key => $memFee)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $memFee->committee->committee_name }}</td>
@@ -49,9 +95,9 @@
                                                 <td>{{ format_money($memFee->debt) }}</td>
                                                 <td>
                                                     @if ($memFee->status == 'paid')
-                                                        <span class="badge badge-success">Đã hoàn thành</span>
+                                                        <span class="badge badge-success">Đã thanh toán</span>
                                                     @else
-                                                        <span class="badge badge-danger">Không hoàn thành</span>
+                                                        <span class="badge badge-danger">Chưa thanh toán</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -74,14 +120,18 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                            @if (count($memFees) == 0)
-                                                <tr>
-                                                    <td colspan="8" class="text-center">Không có dữ liệu</td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center">Không có dữ liệu</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                                <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 float-right">
+                                        {!! $memFees->links('pagination::bootstrap-4') !!}
+                                    </ul>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>

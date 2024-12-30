@@ -13,9 +13,13 @@ class MemFeeController extends Controller
         //
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $memFees = $this->memFeeService->getMemFeesWithCommittee();
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $status = $request->status;
+        $search = $request->search;
+        $memFees = $this->memFeeService->getMemFeesWithCommittee($startDate, $endDate, $status, $search);
         return view('membership_fee.index', compact('memFees'));
     }
 
