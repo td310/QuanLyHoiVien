@@ -19,12 +19,12 @@ class CommitteeController extends Controller
         $status = $request->query('status');
         $search = $request->query('search');
         $committees = $this->committeeService->getAllCommittees($status, $search);
-        return view('customer_partner.index', compact('committees'));
+        return view('customer_partner.committee.index', compact('committees'));
     }
 
     public function create()
     {
-        return view('customer_partner.create');
+        return view('customer_partner.committee.create');
     }
 
     public function store(CommitteeRequest $request)
@@ -37,13 +37,13 @@ class CommitteeController extends Controller
     public function show(string $id)
     {
         $committee = $this->committeeService->getCommitteeById($id);
-        return view('customer_partner.show', compact('committee'));
+        return view('customer_partner.committee.show', compact('committee'));
     }
 
     public function edit(string $id)
     {
         $committee = $this->committeeService->getCommitteeById($id);
-        return view('customer_partner.edit', compact('committee'));
+        return view('customer_partner.committee.edit', compact('committee'));
     }
 
 
@@ -67,7 +67,7 @@ class CommitteeController extends Controller
         $search = $request->search;
         $years = $this->committeeService->getDistinctYears();
         $committee = $this->committeeService->getCommitteeWithFees($id, $year, $search);
-        return view('customer_partner.committee_fee', compact('committee', 'years'));
+        return view('customer_partner.committee.committee_fee', compact('committee', 'years'));
     }
 
     public function sponsorships(Request $request, string $id)
@@ -76,6 +76,6 @@ class CommitteeController extends Controller
         $endDate = $request->end_date;
         $search = $request->search;
         $committee = $this->committeeService->getCommitteeWithSponsorship($id, $startDate, $endDate, $search);
-        return view('customer_partner.sponsorship', compact('committee'));
+        return view('customer_partner.committee.sponsorship', compact('committee'));
     }
 }
