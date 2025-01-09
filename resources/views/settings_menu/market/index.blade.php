@@ -15,8 +15,8 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã ngành</th>
-                                <th>Tên ngành</th>
+                                <th>Mã thị trường</th>
+                                <th>Tên thị trường</th>
                                 <th>Mô tả</th>
                                 <th>Hành động</th>
                             </tr>

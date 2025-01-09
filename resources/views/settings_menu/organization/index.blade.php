@@ -2,7 +2,7 @@
 @section('setting_menu_content')
     <div class="row mb-2">
         <div class="col-12 d-flex justify-content-end">
-            <a href="{{ route('create.target_customer') }}" class="btn btn-success btn-sm">
+            <a href="{{ route('create.organization') }}" class="btn btn-success btn-sm">
                 <i class="fas fa-plus"></i> Tạo mới
             </a>
         </div>
@@ -15,27 +15,27 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã MTKH</th>
-                                <th>Tên MTKH</th>
+                                <th>Mã tổ chức</th>
+                                <th>Tên tổ chức</th>
                                 <th>Mô tả</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($target_customers as $key => $target_customer)
+                            @forelse($organizations as $key => $organization)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $target_customer->target_customer_id }}</td>
-                                    <td>{{ $target_customer->target_customer_name }}</td>
-                                    <td>{{ $target_customer->description }}</td>
+                                    <td>{{ $organization->organization_id }}</td>
+                                    <td>{{ $organization->organization_name }}</td>
+                                    <td>{{ $organization->description }}</td>
                                     <td>
-                                        <a href="{{ route('edit.target_customer', $target_customer->id) }}" class="btn btn-info btn-sm">
+                                        <a href="{{ route('edit.organization', $organization->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ route('show.target_customer', $target_customer->id) }}" class="btn btn-primary btn-sm">
+                                        <a href="{{ route('show.organization', $organization->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <form action="{{ route('destroy.target_customer', $target_customer->id) }}" method="POST"
+                                        <form action="{{ route('destroy.organization', $organization->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')

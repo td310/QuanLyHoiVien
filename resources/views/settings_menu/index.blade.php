@@ -34,6 +34,12 @@
                 'create.certificate',
                 'edit.certificate',
                 'show.certificate',
+                'create.organization',
+                'edit.organization',
+                'show.organization',
+                'create.business',
+                'edit.business',
+                'show.business',
             ];
         @endphp
         <section class="content">
@@ -50,8 +56,10 @@
                         tiêu</a>
                     <a href="{{ route('index.certificate') }}"
                         class="nav-link mr-2 {{ request()->routeIs('index.certificate') ? 'active' : '' }}">Chứng chỉ</a>
-                    <a href="" class="nav-link">Tổ chức</a>
-                    <a href="" class="nav-link">Doanh nghiệp</a>
+                    <a href="{{ route('index.organization') }}"
+                        class="nav-link mr-2 {{ request()->routeIs('index.organization') ? 'active' : '' }}">Tổ chức</a>
+                    <a href="{{ route('index.business') }}"
+                        class="nav-link mr-2 {{ request()->routeIs('index.business') ? 'active' : '' }}">Doanh nghiệp</a>
                 </div>
             @endunless
             <div class="container-fluid">

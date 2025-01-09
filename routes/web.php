@@ -11,6 +11,9 @@ use App\Http\Controllers\FieldController;
 use App\Http\Controllers\MarketController;
 use App\Http\Controllers\TargetCustomerController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\MemLevelController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -140,4 +143,40 @@ Route::prefix('certificate')->group(function () {
     Route::post('/store', [CertificateController::class, 'store'])->name('store.certificate');
     Route::put('/update/{id}', [CertificateController::class, 'update'])->name('update.certificate');
     Route::delete('/destroy/{id}', [CertificateController::class, 'destroy'])->name('destroy.certificate');
+});
+
+//Cài đặt - Tổ chức
+Route::prefix('organization')->group(function () {
+    Route::get('/', [OrganizationController::class, 'index'])->name('index.organization');
+    Route::get('/create', [OrganizationController::class, 'create'])->name('create.organization');
+    Route::get('/edit/{id}', [OrganizationController::class, 'edit'])->name('edit.organization');
+    Route::get('/show/{id}', [OrganizationController::class, 'show'])->name('show.organization');
+    
+    Route::post('/store', [OrganizationController::class, 'store'])->name('store.organization');
+    Route::put('/update/{id}', [OrganizationController::class, 'update'])->name('update.organization');
+    Route::delete('/destroy/{id}', [OrganizationController::class, 'destroy'])->name('destroy.organization');
+});
+
+//Cài đặt - Doanh nghiệp
+Route::prefix('business')->group(function () {
+    Route::get('/', [BusinessController::class, 'index'])->name('index.business');
+    Route::get('/create', [BusinessController::class, 'create'])->name('create.business');
+    Route::get('/edit/{id}', [BusinessController::class, 'edit'])->name('edit.business');
+    Route::get('/show/{id}', [BusinessController::class, 'show'])->name('show.business');
+    
+    Route::post('/store', [BusinessController::class, 'store'])->name('store.business');
+    Route::put('/update/{id}', [BusinessController::class, 'update'])->name('update.business');
+    Route::delete('/destroy/{id}', [BusinessController::class, 'destroy'])->name('destroy.business');
+});
+
+//Cài đặt - Hạng thành viên
+Route::prefix('membership-level')->group(function () {
+    Route::get('/', [MemLevelController::class, 'index'])->name('index.membership_level');
+    Route::get('/create', [MemLevelController::class, 'create'])->name('create.membership_level');
+    Route::get('/edit/{id}', [MemLevelController::class, 'edit'])->name('edit.membership_level');
+    Route::get('/show/{id}', [MemLevelController::class, 'show'])->name('show.membership_level');
+    
+    Route::post('/store', [MemLevelController::class, 'store'])->name('store.membership_level');
+    Route::put('/update/{id}', [MemLevelController::class, 'update'])->name('update.membership_level');
+    Route::delete('/destroy/{id}', [MemLevelController::class, 'destroy'])->name('destroy.membership_level');
 });
