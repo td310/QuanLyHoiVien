@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\Setting\BusinessService;
 use App\Http\Requests\BusinessRequest;
+use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
@@ -11,10 +12,11 @@ class BusinessController extends Controller
     {
         //
     }
-    public function index()
+    public function index(Request $request)
     {
-        $business = $this->businessService->getAllBusiness();
-        return view('settings_menu.business.index', compact('business'));
+        $search = $request->input('search');
+        $business = $this->businessService->getAllBusiness($search);
+        return view('settings_menu.business.index', compact('business', 'search'));
     }
 
     public function create()

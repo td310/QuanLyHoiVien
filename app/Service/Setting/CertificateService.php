@@ -15,9 +15,16 @@ class CertificateService
         ]);
     }
 
-    public function getAllCertificates()
+    public function getAllCertificates($search = null)
     {
-        return Certificate::latest()->get();
+        $query = Certificate::query();
+        
+        if ($search) {
+            $query->where('certificate_id', 'like', "%{$search}%")
+                  ->orWhere('certificate_name', 'like', "%{$search}%");
+        }
+        
+        return $query->latest()->paginate(6);
     }
 
     public function getCertificate($id)

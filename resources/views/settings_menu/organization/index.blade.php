@@ -10,6 +10,21 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="d-flex align-items-center justify-content-between p-4">
+                    <div class="card-tools">
+                        <form action="{{ route('index.organization') }}" method="GET">
+                            <div class="input-group input-group-sm" style="width: 300px;">
+                                <input type="text" name="search" class="form-control float-right"
+                                    placeholder="Tìm kiếm bằng mã/tên tổ chức" value="{{$search}}">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -53,6 +68,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        {!! $organizations->links('pagination::bootstrap-4') !!}
+                    </ul>
                 </div>
                 <!-- /.card-body -->
             </div>

@@ -15,9 +15,16 @@ class BusinessService
         ]);
     }
 
-    public function getAllBusiness()
+    public function getAllBusiness($search = null)
     {
-        return Business::latest()->get();
+        $query = Business::query();
+        
+        if ($search) {
+            $query->where('business_id', 'like', "%{$search}%")
+                  ->orWhere('business_name', 'like', "%{$search}%");
+        }
+        
+        return $query->latest()->paginate(6);
     }
 
     public function getBusiness($id)

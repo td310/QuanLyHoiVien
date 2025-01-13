@@ -15,9 +15,21 @@ class MajorService
         ]);
     }
 
-    public function getAllMajors()
+    public function getAllMajors($search = null)
     {
-        return Major::latest()->get();
+        $query = Major::query();
+
+        if ($search) {
+            $query->where('major_id', 'like', "%{$search}%")
+                ->orWhere('major_name', 'like', "%{$search}%");
+        }
+
+        return $query->latest()->paginate(6);
+    }
+
+    public function getAllMajorsForSelection()
+    {
+        return Major::all();
     }
 
     public function getMajor($id)

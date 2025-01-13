@@ -15,9 +15,16 @@ class MarketService
         ]);
     }
 
-    public function getAllMarkets()
+    public function getAllMarkets($search = null)
     {
-        return Market::latest()->get();
+        $query = Market::query();
+        
+        if ($search) {
+            $query->where('market_id', 'like', "%{$search}%")
+                  ->orWhere('market_name', 'like', "%{$search}%");
+        }
+        
+        return $query->latest()->paginate(6);
     }
 
     public function getMarket($id)

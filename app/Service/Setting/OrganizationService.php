@@ -15,11 +15,17 @@ class OrganizationService
         ]);
     }
 
-    public function getAllOrganizations()
+    public function getAllOrganizations($search = null)
     {
-        return Organization::latest()->get();
+        $query = Organization::query();
+        
+        if ($search) {
+            $query->where('organization_id', 'like', "%{$search}%")
+                  ->orWhere('organization_name', 'like', "%{$search}%");
+        }
+        
+        return $query->latest()->paginate(6);
     }
-
     public function getOrganization($id)
     {
         return Organization::findOrFail($id);

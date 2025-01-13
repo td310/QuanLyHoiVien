@@ -14,6 +14,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\MemLevelController;
+use App\Http\Controllers\ClubController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -61,6 +62,7 @@ Route::prefix('customer-partner')->group(function () {
 //Khách hàng doanh nghiệp
 Route::prefix('customer-corporate')->group(function () {
     Route::get('/', [CusCorporateController::class, 'index'])->name('index.customer_corporate');
+    Route::get('/create', [CusCorporateController::class, 'create'])->name('create.customer_corporate');
 });
 
 //Hội Phí
@@ -180,3 +182,17 @@ Route::prefix('membership-level')->group(function () {
     Route::put('/update/{id}', [MemLevelController::class, 'update'])->name('update.membership_level');
     Route::delete('/destroy/{id}', [MemLevelController::class, 'destroy'])->name('destroy.membership_level');
 });
+
+//Câu lạc bộ
+Route::prefix('club')->group(function () {
+    Route::get('/', [ClubController::class, 'index'])->name('index.club');
+    Route::get('/create', [ClubController::class, 'create'])->name('create.club');
+    Route::get('/edit/{id}', [ClubController::class, 'edit'])->name('edit.club');
+    Route::get('/show/{id}', [ClubController::class, 'show'])->name('show.club');
+    
+    Route::post('/store', [ClubController::class, 'store'])->name('store.club');
+    Route::put('/update/{id}', [ClubController::class, 'update'])->name('update.club');
+    Route::delete('/destroy/{id}', [ClubController::class, 'destroy'])->name('destroy.club');
+});
+
+Route::get('/api/fields-by-major/{major}', [ClubController::class, 'getFieldsByMajor']);

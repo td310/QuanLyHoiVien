@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TargetCusRequest;
 use App\Service\Setting\TargetCusService;
+use Illuminate\Http\Request;
 
 class TargetCustomerController extends Controller
 {
@@ -11,10 +12,11 @@ class TargetCustomerController extends Controller
     {
         //
     }
-    public function index()
+    public function index(Request $request)
     {
-        $target_customers = $this->targetCustomerService->getAllTargetCustomers();
-        return view('settings_menu.target_customer.index', compact('target_customers'));
+        $search = $request->input('search');
+        $target_customers = $this->targetCustomerService->getAllTargetCustomers($search);
+        return view('settings_menu.target_customer.index', compact('target_customers', 'search'));
     }
 
     public function create()

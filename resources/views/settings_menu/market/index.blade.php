@@ -10,6 +10,21 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="d-flex align-items-center justify-content-between p-4">
+                    <div class="card-tools">
+                        <form action="{{ route('index.market') }}" method="GET">
+                            <div class="input-group input-group-sm" style="width: 300px;">
+                                <input type="text" name="search" class="form-control float-right"
+                                    placeholder="Tìm kiếm bằng mã/tên thị trường" value="{{ $search }}">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -24,7 +39,7 @@
                         <tbody>
                             @forelse($markets as $key => $market)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $markets->firstItem() + $key }}</td>
                                     <td>{{ $market->market_id }}</td>
                                     <td>{{ $market->market_name }}</td>
                                     <td>{{ $market->description }}</td>
@@ -53,6 +68,11 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            {!! $markets->links('pagination::bootstrap-4') !!}
+                        </ul>
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>

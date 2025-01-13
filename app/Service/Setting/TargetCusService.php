@@ -15,9 +15,16 @@ class TargetCusService
         ]);
     }
 
-    public function getAllTargetCustomers()
+    public function getAllTargetCustomers($search = null)
     {
-        return TargetCustomer::latest()->get();
+        $query = TargetCustomer::query();
+        
+        if ($search) {
+            $query->where('target_customer_id', 'like', "%{$search}%")
+                  ->orWhere('target_customer_name', 'like', "%{$search}%");
+        }
+        
+        return $query->latest()->paginate(6);
     }
 
     public function getTargetCustomers($id)

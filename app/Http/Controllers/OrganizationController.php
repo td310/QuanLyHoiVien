@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\Setting\OrganizationService;
 use App\Http\Requests\OrganizationRequest;
+use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
@@ -11,10 +12,11 @@ class OrganizationController extends Controller
     {
         //
     }
-    public function index()
+    public function index(Request $request)
     {
-        $organizations = $this->organizationService->getAllOrganizations();
-        return view('settings_menu.organization.index', compact('organizations'));
+        $search = $request->input('search');
+        $organizations = $this->organizationService->getAllOrganizations($search);
+        return view('settings_menu.organization.index', compact('organizations', 'search'));
     }
 
     public function create()

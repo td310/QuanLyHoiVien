@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\Setting\CertificateService;
 use App\Http\Requests\CertificateRequest;
+use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
@@ -11,10 +12,11 @@ class CertificateController extends Controller
     {
         //
     }
-    public function index()
+    public function index(Request $request)
     {
-        $certificates = $this->certificateService->getAllCertificates();
-        return view('settings_menu.certificate.index', compact('certificates'));
+        $search = $request->input('search');
+        $certificates = $this->certificateService->getAllCertificates($search);
+        return view('settings_menu.certificate.index', compact('certificates', 'search'));
     }
 
     public function create()

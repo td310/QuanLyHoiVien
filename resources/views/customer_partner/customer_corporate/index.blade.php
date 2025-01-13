@@ -2,7 +2,7 @@
 @section('customer_partner_content')
     <div class="row mb-2">
         <div class="col-12 d-flex justify-content-end">
-            <a href="" class="btn btn-success btn-sm">
+            <a href="{{route('create.customer_corporate')}}" class="btn btn-success btn-sm">
                 <i class="fas fa-plus"></i> Tạo mới
             </a>
         </div>

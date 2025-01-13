@@ -19,7 +19,7 @@ class CusCorporateController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer_partner.customer_corporate.create');
     }
 
     /**

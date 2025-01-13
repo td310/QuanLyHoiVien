@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\Setting\MajorService;
 use App\Http\Requests\MajorRequest;
+use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
@@ -11,10 +12,11 @@ class MajorController extends Controller
     {
         //
     }
-    public function index()
+    public function index(Request $request)
     {
-        $majors = $this->majorService->getAllMajors();
-        return view('settings_menu.major.index', compact('majors'));
+        $search = $request->input('search');
+        $majors = $this->majorService->getAllMajors($search);
+        return view('settings_menu.major.index', compact('majors', 'search'));
     }
 
     public function create()

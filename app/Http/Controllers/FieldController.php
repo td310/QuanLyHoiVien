@@ -16,13 +16,13 @@ class FieldController extends Controller
         //
     }
 
-
-    public function index()
+    public function index(Request $request)
     {
-        $fields = $this->fieldService->getAllFields();
-        return view('settings_menu.field.index', compact('fields'));
+        $filters = $request->only(['search', 'major_id']);
+        $fields = $this->fieldService->getAllFields($filters);
+        $majors = $this->majorService->getAllMajorsForSelection();
+        return view('settings_menu.field.index', compact('fields', 'majors', 'filters'));
     }
-
     public function create()
     {
         $majors = $this->majorService->getAllMajors();

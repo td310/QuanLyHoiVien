@@ -11,36 +11,45 @@ class FieldService
     public function createField(array $data)
     {
         DB::beginTransaction();
-        try {
-            $field = Field::create([
-                'field_name' => $data['field_name'],
-                'field_id' => $data['field_id'],
-                'description' => $data['description'],
-                'major_id' => $data['major_id']
-            ]);
+        $field = Field::create([
+            'field_name' => $data['field_name'],
+            'field_id' => $data['field_id'],
+            'description' => $data['description'],
+            'major_id' => $data['major_id']
+        ]);
 
-            if (isset($data['subgroups'])) {
-                foreach ($data['subgroups'] as $subgroupData) {
-                    $subgroup = Subgroup::create([
-                        'subgroup_name' => $subgroupData['name'],
-                        'description' => $subgroupData['description']
-                    ]);
+        if (isset($data['subgroups'])) {
+            foreach ($data['subgroups'] as $subgroupData) {
+                $subgroup = Subgroup::create([
+                    'subgroup_name' => $subgroupData['name'],
+                    'description' => $subgroupData['description']
+                ]);
 
-                    $field->subGroups()->attach($subgroup->id);
-                }
+                $field->subGroups()->attach($subgroup->id);
             }
-
-            DB::commit();
-            return $field;
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
         }
+
+        DB::commit();
+        return $field;
     }
 
-    public function getAllFields()
+    public function getAllFields($filters = [])
     {
-        return Field::latest()->get();
+        $query = Field::with(['major']);
+
+        if (!empty($filters['search'])) {
+            $search = $filters['search'];
+            $query->where(function ($q) use ($search) {
+                $q->where('field_id', 'like', "%{$search}%")
+                    ->orWhere('field_name', 'like', "%{$search}%");
+            });
+        }
+
+        if (!empty($filters['major_id'])) {
+            $query->where('major_id', $filters['major_id']);
+        }
+
+        return $query->latest()->paginate(6);
     }
 
     public function getField($id)

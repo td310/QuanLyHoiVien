@@ -12,10 +12,11 @@ class MarketController extends Controller
     {
         //
     }
-    public function index()
+    public function index(Request $request)
     {
-        $markets = $this->marketService->getAllMarkets();
-        return view('settings_menu.market.index', compact('markets'));
+        $search = $request->input('search');
+        $markets = $this->marketService->getAllMarkets($search);
+        return view('settings_menu.market.index', compact('markets', 'search'));
     }
 
     public function create()
