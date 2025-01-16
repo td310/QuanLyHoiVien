@@ -12,11 +12,18 @@ class ConnectionManager extends Model
         'phone',
         'gender',
         'email_connection',
-        'club_id'
+        'is_leader',
+        'club_id',
+        'cus_corporate_id'
     ];
 
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    public function cusCorporate()
+    {
+        return $this->belongsTo(CusCorporate::class);
     }
 }

@@ -22,8 +22,7 @@ class Club extends Model
         'status',
         'major_id',
         'feild_id',
-        'market_id',
-        'connection_manager_id'
+        'market_id'
     ];
 
     public function major()

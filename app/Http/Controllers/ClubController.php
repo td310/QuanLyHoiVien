@@ -21,7 +21,7 @@ class ClubController extends Controller
         $clubs = $this->clubService->getAllClubs($filters);
         $fields = Field::all();
         $markets = Market::all();
-        
+
         return view('club.index', compact('clubs', 'fields', 'markets', 'filters'));
     }
 
@@ -34,12 +34,8 @@ class ClubController extends Controller
 
     public function store(ClubRequest $request)
     {
-        try {
-            $this->clubService->createClub($request->validated());
-            return redirect()->route('index.club')->with('success', 'Thêm câu lạc bộ thành công');
-        } catch (\Exception $e) {
-            return back()->withInput()->withErrors(['message' => 'Có lỗi xảy ra khi thêm mới câu lạc bộ: ' . $e->getMessage()]);
-        }
+        $this->clubService->createClub($request->validated());
+        return redirect()->route('index.club')->with('success', 'Thêm câu lạc bộ thành công');
     }
 
     public function show(string $id)
@@ -61,7 +57,7 @@ class ClubController extends Controller
         try {
             $this->clubService->updateClub($id, $request->validated());
             return redirect()->route('index.club')->with('success', 'Cập nhật câu lạc bộ thành công');
-        } catch (\Exception $e) {   
+        } catch (\Exception $e) {
             return back()->withInput()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
     }
