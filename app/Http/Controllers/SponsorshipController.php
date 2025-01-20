@@ -26,8 +26,9 @@ class SponsorshipController extends Controller
 
     public function create()
     {
+        $corporates = $this->sponsorshipService->getCusCorporatesForSelection();
         $committees = $this->sponsorshipService->getCommitteesForSelection();
-        return view('sponsorship.create', compact('committees'));
+        return view('sponsorship.create', compact('committees', 'corporates'));
     }
 
     public function store(SponsorshipRequest $request)

@@ -51,10 +51,13 @@
                                 <form action="{{ route('index.membership_fee') }}" method="GET">
                                     <div class="left-section">
                                         <label>Trạng thái</label>
-                                        <select name="status" class="form-control" style="width: 200px;" onchange="this.form.submit()">
+                                        <select name="status" class="form-control" style="width: 200px;"
+                                            onchange="this.form.submit()">
                                             <option value="">Tất cả</option>
-                                            <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Đã thanh toán</option>
-                                            <option value="unpaid" {{ request('status') == 'unpaid' ? 'selected' : '' }}>Chưa thanh toán</option>
+                                            <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Đã
+                                                thanh toán</option>
+                                            <option value="unpaid" {{ request('status') == 'unpaid' ? 'selected' : '' }}>
+                                                Chưa thanh toán</option>
                                         </select>
                                     </div>
                                 </form>
@@ -90,7 +93,15 @@
                                         @forelse ($memFees as $key => $memFee)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $memFee->committee->committee_name }}</td>
+                                                <td>
+                                                    @if ($memFee->committee_id)
+                                                        {{ $memFee->committee->committee_name }}
+                                                    @elseif($memFee->cuscorporate_id)
+                                                        {{ $memFee->cusCorporate->company_vn }}
+                                                    @else
+                                                        Không có dữ liệu khách hàng
+                                                    @endif
+                                                </td>
                                                 <td>{{ format_year($memFee->date) }}</td>
                                                 <td>{{ format_money($memFee->debt) }}</td>
                                                 <td>

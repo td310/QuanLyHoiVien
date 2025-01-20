@@ -35,23 +35,50 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="row align-items-center mb-2">
-                                                    <label class="col-sm-4 col-form-label">Người tài trợ</label>
+                                                    <label class="col-sm-4 col-form-label">Loại khách hàng</label>
                                                     <div class="col-sm-8">
-                                                        <select
-                                                            class="form-control @error('committee_id') is-invalid @enderror"
-                                                            id="committee_select" name="committee_id">
-                                                            <option value="">Chọn khách hàng</option>
+                                                        <select class="form-control" id="customer_type"
+                                                            name="customer_type">
+                                                            <option value="">Chọn loại khách hàng</option>
+                                                            <option value="committee">Hội viên</option>
+                                                            <option value="corporate">Doanh nghiệp</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group committee-select" style="display: none;">
+                                                <div class="row align-items-center mb-2">
+                                                    <label class="col-sm-4 col-form-label">Hội viên</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" name="committee_id">
+                                                            <option value="">Chọn hội viên</option>
                                                             @foreach ($committees as $committee)
                                                                 <option value="{{ $committee->id }}"
-                                                                    data-id-card="{{ $committee->id_card }}"
+                                                                    data-card="{{ $committee->id_card }}"
                                                                     data-email="{{ $committee->email }}">
                                                                     {{ $committee->committee_name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @error('committee_id')
-                                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group corporate-select" style="display: none;">
+                                                <div class="row align-items-center mb-2">
+                                                    <label class="col-sm-4 col-form-label">Doanh nghiệp</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" name="cuscorporate_id">
+                                                            <option value="">Chọn doanh nghiệp</option>
+                                                            @foreach ($corporates as $corporate)
+                                                                <option value="{{ $corporate->id }}"
+                                                                    data-card="{{ $corporate->id_card }}"
+                                                                    data-email="{{ $corporate->email }}">
+                                                                    {{ $corporate->company_vn }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,22 +220,32 @@
             <!-- /.row -->
         </section>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.getElementById('committee_select').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            document.getElementById('id_card').value = selectedOption.dataset.idCard;
-            document.getElementById('email').value = selectedOption.dataset.email;
+        $(document).ready(function() {
+            $('#customer_type').change(function() {
+                $('.committee-select, .corporate-select').hide();
+                if ($(this).val() === 'committee') {
+                    $('.committee-select').show();
+                } else if ($(this).val() === 'corporate') {
+                    $('.corporate-select').show();
+                }
+            });
+
+            $('select[name="committee_id"], select[name="cuscorporate_id"]').change(function() {
+                var selectedOption = $(this).find('option:selected');
+                $('#id_card').val(selectedOption.data('card'));
+                $('#email').val(selectedOption.data('email'));
+            });
         });
-    </script>
-    <script>
+
         function displayFileName(input) {
             var fileName = input.files[0].name;
 
             var label = document.getElementById('fileInputLabel');
             label.textContent = fileName;
         }
-    </script>
-    <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             function formatMoney(amount) {
                 return new Intl.NumberFormat('vi-VN', {

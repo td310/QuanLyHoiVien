@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\CusCorporate;
 use Illuminate\Support\Facades\DB;
+use App\Models\MemFee;
 
 class CusCorporateService
 {
@@ -61,11 +62,44 @@ class CusCorporateService
         return $corporate;
     }
 
-    public function getAllCorporates()
+    public function getAllCorporates($filters = [], $search = null)
     {
-        return CusCorporate::with(['field', 'market', 'targetCustomer'])->latest()->paginate(10);
-    }
+        $query = CusCorporate::with(['field', 'market', 'targetCustomer']);
 
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('id_login', 'like', "%{$search}%")
+                  ->orWhere('company_vn', 'like', "%{$search}%")
+                  ->orWhereHas('field', function ($q) use ($search) {
+                      $q->where('field_name', 'like', "%{$search}%");
+                  })
+                  ->orWhereHas('market', function ($q) use ($search) {
+                      $q->where('market_name', 'like', "%{$search}%");
+                  })
+                  ->orWhereHas('targetCustomer', function ($q) use ($search) {
+                      $q->where('target_customer_name', 'like', "%{$search}%");
+                  });
+            });
+        }
+        
+        if (isset($filters['field_id'])) {
+            $query->where('feild_id', $filters['field_id']);
+        }
+        
+        if (isset($filters['market_id'])) {
+            $query->where('market_id', $filters['market_id']);
+        }
+        
+        if (isset($filters['target_customer_id'])) {
+            $query->where('target_customer_id', $filters['target_customer_id']);
+        }
+        
+        if (isset($filters['main_address'])) {
+            $query->where('main_address', 'like', "%{$filters['main_address']}%");
+        }
+        
+        return $query->latest()->paginate(6);
+    }
     public function getCorporateById($id)
     {
         return CusCorporate::with(['field', 'market', 'targetCustomer', 'connectionManagers'])
@@ -136,4 +170,64 @@ class CusCorporateService
         $corporate->delete();
         DB::commit();
     }
+
+    public function getDistinctYears()
+    {
+        return MemFee::selectRaw('YEAR(date) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+    }
+
+    public function getCorporateWithFees($id, $year = null, $search = null)
+    {
+        $corporate = CusCorporate::with(['memFees' => function ($query) use ($year, $search) {
+            if ($year) {
+                $query->whereYear('date', $year);
+            }
+            
+            if ($search) {
+                if (preg_match('/^\d{2}\/\d{2}$/', $search)) {
+                    $parts = explode('/', $search);
+                    $day = $parts[0];
+                    $month = $parts[1];
+                    
+                    $query->whereDay('date', $day)
+                          ->whereMonth('date', $month);
+                } else {
+                    $query->where(function($q) use ($search) {
+                        $q->whereYear('date', 'LIKE', "%{$search}%")
+                          ->orWhereMonth('date', 'LIKE', "%{$search}%")
+                          ->orWhereDay('date', 'LIKE', "%{$search}%")
+                          ->orWhere('date', 'LIKE', "%{$search}%");
+                    });
+                }
+            }
+            
+            $query->latest();
+        }])->findOrFail($id);
+    
+        return $corporate;
+    }
+
+    public function getCusCorporateWithSponsorship($id, $startDate = null, $endDate = null, $search = null)
+    {
+        $corporate = CusCorporate::with(['sponsorships' => function ($query) use ($startDate, $endDate, $search){
+            if ($startDate && $endDate) {
+                $query->whereBetween('date', [$startDate, $endDate]);
+            }
+
+            if ($search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('product', 'LIKE', "%{$search}%")
+                    ->orWhere('unit', 'LIKE', "%{$search}%");
+                });
+            }
+            $query->latest();
+        }])->findOrFail($id);
+
+        return $corporate;
+    }
+
+
 }

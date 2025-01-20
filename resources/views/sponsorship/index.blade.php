@@ -82,7 +82,15 @@
                                         @forelse ($sponsorships as $key => $sponsorship)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $sponsorship->committee->committee_name }}</td>
+                                                <td>
+                                                    @if ($sponsorship->committee_id)
+                                                        {{ $sponsorship->committee->committee_name }}
+                                                    @elseif($sponsorship->cuscorporate_id)
+                                                        {{ $sponsorship->cusCorporate->company_vn }}
+                                                    @else
+                                                        Không có dữ liệu khách hàng
+                                                    @endif
+                                                </td>
                                                 <td>{{ $sponsorship->product }}</td>
                                                 <td>{{ $sponsorship->unit }}</td>
                                                 <td>{{ $sponsorship->quantity }}</td>

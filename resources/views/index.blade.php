@@ -111,7 +111,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.customer_partner') }}"
-                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'customer_partner') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('*.customer_partner') || request()->routeIs('*.customer_corporate') ? 'active' : '' }}">
                                         <p>Khách hàng & Đối tác</p>
                                     </a>
                                 </li>
@@ -128,7 +128,10 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.sponsorship') }}"
-                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'sponsorship') && !str_contains(Route::currentRouteName(), 'customer_partner') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('index.sponsorship') || 
+                                            (str_contains(Route::currentRouteName(), 'sponsorship') && 
+                                            !str_contains(Route::currentRouteName(), 'customer_partner') && 
+                                            !str_contains(Route::currentRouteName(), 'customer_corporate')) ? 'active' : '' }}">
                                         <p>Tài trợ</p>
                                     </a>
                                 </li>

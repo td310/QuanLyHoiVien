@@ -9,8 +9,9 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('index.customer_corporate') }}">Khách hàng doanh
-                                    nghiệp</a></li>
+                                    nghiệp</a>
                             <li class="breadcrumb-item active">Thêm mới</li>
                         </ol>
                     </div>

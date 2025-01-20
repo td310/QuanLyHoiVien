@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('index.customer_partner') }}">Ban chấp hành</a>
+                            <li class="breadcrumb-item"><a href="{{ route('index.customer_corporate') }}">Khách hàng doanh nghiệp</a>
                             </li>
                             <li class="breadcrumb-item active">Lịch sử tài trợ</li>
                         </ol>
@@ -31,7 +31,7 @@
                                                 <strong>Tổng đóng góp</strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <strong>{{ format_money($committee->total_sponsorship) }}</strong>
+                                                <strong>{{ format_money($corporate->total_sponsorship) }}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="card">
                             <div class="d-flex align-items-center justify-content-between p-4">
-                                <form action="{{ route('sponsorships.customer_partner', $committee->id) }}" method="GET"
+                                <form action="{{ route('sponsorships.customer_corporate', $corporate->id) }}" method="GET"
                                     id="dateFilterForm">
                                     <div class="left-section">
                                         <label>Thời gian</label>
@@ -63,7 +63,7 @@
 
                                 <!-- Search Form -->
                                 <div class="card-tools">
-                                    <form action="{{ route('sponsorships.customer_partner', $committee->id) }}"
+                                    <form action="{{ route('sponsorships.customer_corporate', $corporate->id) }}"
                                         method="GET" id="searchForm">
                                         <div class="input-group input-group-sm" style="width: 200px;">
                                             <input type="text" name="search" class="form-control float-right"
@@ -92,7 +92,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($committee->sponsorships as $key => $sponsorship)
+                                        @forelse($corporate->sponsorships as $key => $sponsorship)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $sponsorship->date }}</td>
@@ -138,13 +138,13 @@
             const startDate = this.querySelector('[name="start_date"]').value;
             const endDate = this.querySelector('[name="end_date"]').value;
             window.location.href =
-                `{{ route('sponsorships.customer_partner', $committee->id) }}?start_date=${startDate}&end_date=${endDate}`;
+                `{{ route('sponsorships.customer_corporate', $corporate->id) }}?start_date=${startDate}&end_date=${endDate}`;
         });
 
         document.getElementById('searchForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const search = this.querySelector('[name="search"]').value;
-            window.location.href = `{{ route('sponsorships.customer_partner', $committee->id) }}?search=${search}`;
+            window.location.href = `{{ route('sponsorships.customer_corporate', $corporate->id) }}?search=${search}`;
         });
     </script>
 @endsection

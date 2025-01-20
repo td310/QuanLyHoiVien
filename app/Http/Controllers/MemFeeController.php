@@ -25,8 +25,13 @@ class MemFeeController extends Controller
 
     public function create()
     {
-        $committees = $this->memFeeService->getCommitteesForSelection();
-        return view('membership_fee.create', compact('committees'));
+        try {
+            $committees = $this->memFeeService->getCommitteesForSelection();
+            $corporates = $this->memFeeService->getCusCorporatesForSelection();
+            return view('membership_fee.create', compact('committees', 'corporates'));
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['message' => 'Có lỗi xảy ra: ' . $e->getMessage()]);
+        }
     }
 
 

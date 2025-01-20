@@ -65,7 +65,9 @@ Route::prefix('customer-corporate')->group(function () {
     Route::get('/create', [CusCorporateController::class, 'create'])->name('create.customer_corporate');
     Route::get('/edit/{id}', [CusCorporateController::class, 'edit'])->name('edit.customer_corporate');
     Route::get('/show/{id}', [CusCorporateController::class, 'show'])->name('show.customer_corporate');
-    
+    Route::get('/fees/{id}', [CusCorporateController::class, 'fees'])->name('fees.customer_corporate');
+    Route::get('/sponsorships/{id}', [CusCorporateController::class, 'sponsorships'])->name('sponsorships.customer_corporate');
+
     Route::post('/store', [CusCorporateController::class, 'store'])->name('store.customer_corporate');
     Route::put('/update/{id}', [CusCorporateController::class, 'update'])->name('update.customer_corporate');
     Route::delete('/destroy/{id}', [CusCorporateController::class, 'destroy'])->name('destroy.customer_corporate');

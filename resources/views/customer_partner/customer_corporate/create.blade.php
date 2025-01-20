@@ -1,6 +1,5 @@
 @extends('index')
 @section('content')
-
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
@@ -10,26 +9,15 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Khách hàng doanh nghiệp</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index.customer_corporate') }}">Khách hàng doanh
+                                    nghiệp</a>
                             <li class="breadcrumb-item active">Thêm mới</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        {{-- @if ($errors->any() || session('error'))
-        <div class="card-body">
-            <div class="alert alert-danger">
-                <p class="font-weight-bold">Errors:</p>
-                @foreach ($errors->all() as $error)
-                    <p class="mb-0">{{ $error }}</p>
-                @endforeach
-                @if(session('error'))
-                    <p class="mb-0">{{ session('error') }}</p>
-                @endif
-            </div>
-        </div>
-    @endif --}}
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -41,7 +29,7 @@
                                 <h3 class="card-title">Tạo mới khách hàng doanh nghiệp</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{route('store.customer_corporate')}}" method="POST">
+                            <form action="{{ route('store.customer_corporate') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
@@ -337,25 +325,31 @@
                                                                     <input type="radio" class="form-check-input"
                                                                         id="50-100" name="size_company" value="50-100"
                                                                         {{ old('size_company') == '50-100' ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="50-100">50-100 người</label>
+                                                                    <label class="form-check-label" for="50-100">50-100
+                                                                        người</label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input type="radio" class="form-check-input"
-                                                                        id="101-200" name="size_company" value="101-200"
+                                                                        id="101-200" name="size_company"
+                                                                        value="101-200"
                                                                         {{ old('size_company') == '101-200' ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="101-200">101-200 người</label>
+                                                                    <label class="form-check-label" for="101-200">101-200
+                                                                        người</label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input type="radio" class="form-check-input"
-                                                                        id="201-500" name="size_company" value="201-500"
+                                                                        id="201-500" name="size_company"
+                                                                        value="201-500"
                                                                         {{ old('size_company') == '201-500' ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="201-500">201-500 người</label>
+                                                                    <label class="form-check-label" for="201-500">201-500
+                                                                        người</label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input type="radio" class="form-check-input"
                                                                         id="more500" name="size_company" value=">500"
                                                                         {{ old('size_company') == '>500' ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="more500">Trên 500 người</label>
+                                                                    <label class="form-check-label" for="more500">Trên
+                                                                        500 người</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -373,8 +367,7 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Chứng chỉ</label>
                                                         <div class="col-sm-7">
-                                                            <select class="form-control select2"
-                                                                name="certificate_id">
+                                                            <select class="form-control select2" name="certificate_id">
                                                                 <option value="">Chọn chứng chỉ</option>
                                                                 @foreach ($certificates as $certificate)
                                                                     <option value="{{ $certificate->id }}">
@@ -432,7 +425,9 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Chức vụ</label>
                                                         <div class="col-sm-7">
-                                                            <input type="text" class="form-control" name="leader[position]" value="{{ old('leader.position') }}">
+                                                            <input type="text" class="form-control"
+                                                                name="leader[position]"
+                                                                value="{{ old('leader.position') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -440,7 +435,8 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Số điện thoại</label>
                                                         <div class="col-sm-7">
-                                                            <input type="text" class="form-control" name="leader[phone]" value="{{ old('leader.phone') }}">
+                                                            <input type="text" class="form-control"
+                                                                name="leader[phone]" value="{{ old('leader.phone') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -452,15 +448,16 @@
                                                                 <div class="form-check">
                                                                     <input type="radio"
                                                                         class="form-check-input @error('gender') is-invalid @enderror"
-                                                                        id="male" name="leader[gender]" value="male"
-                                                                        checked>
+                                                                        id="male" name="leader[gender]"
+                                                                        value="male" checked>
                                                                     <label class="form-check-label"
                                                                         for="male">Nam</label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input type="radio"
                                                                         class="form-check-input @error('gender') is-invalid @enderror"
-                                                                        id="female" name="leader[gender]" value="female">
+                                                                        id="female" name="leader[gender]"
+                                                                        value="female">
                                                                     <label class="form-check-label"
                                                                         for="female">Nữ</label>
                                                                 </div>
@@ -472,7 +469,9 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Email</label>
                                                         <div class="col-sm-7">
-                                                            <input type="text" class="form-control" name="leader[email_connection]" value="{{ old('leader.email_connection') }}">
+                                                            <input type="text" class="form-control"
+                                                                name="leader[email_connection]"
+                                                                value="{{ old('leader.email_connection') }}">
                                                         </div>
                                                     </div>
                                                 </div>

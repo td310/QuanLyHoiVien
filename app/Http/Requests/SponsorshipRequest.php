@@ -12,9 +12,9 @@ class SponsorshipRequest extends FormRequest
     }
 
     public function rules(): array
-    { 
-        return[
-            'committee_id' => 'required|exists:committees,id',
+    {
+        $rules = [
+            'customer_type' => 'required|in:committee,corporate',
             'date' => 'required|date',
             'description' => 'required|string|max:500',
             'product' => 'required|string|max:255',
@@ -24,12 +24,27 @@ class SponsorshipRequest extends FormRequest
             'total' => 'required|numeric',
             'attachment' => 'nullable'
         ];
+
+        if ($this->input('customer_type') === 'committee') {
+            $rules['committee_id'] = 'required|exists:committees,id';
+            $rules['cuscorporate_id'] = 'nullable';
+        }
+
+        if ($this->input('customer_type') === 'corporate') {
+            $rules['cuscorporate_id'] = 'required|exists:cus_corporates,id';
+            $rules['committee_id'] = 'nullable';
+        }
+
+        return $rules;
     }
-    
+
     public function messages(): array
     {
         return [
-            'committee_id.required' => 'Vui lòng chọn khách hàng',
+            'customer_type.required' => 'Vui lòng chọn loại khách hàng',
+            'customer_type.in' => 'Loại khách hàng không hợp lệ',
+            'committee_id.required' => 'Vui lòng chọn hội viên',
+            'cuscorporate_id.required' => 'Vui lòng chọn doanh nghiệp',
             'date.required' => 'Nhập ngày hội phí.',
             'description.required' => 'Nhập nội dung.',
             'description.max' => 'Nội dung không quá 500 ký tự.',
@@ -45,5 +60,4 @@ class SponsorshipRequest extends FormRequest
             'total.max' => 'Tổng tiền không quá 255 ký tự.',
         ];
     }
-    
 }

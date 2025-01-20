@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Models\Committees;
 use App\Models\Sponsorship;
-use Illuminate\Support\Facades\Log;
+use App\Models\CusCorporate;
 
 class SponsorshipService
 {
@@ -13,6 +13,14 @@ class SponsorshipService
         return Committees::select('id', 'committee_name', 'id_card', 'email')
             ->where('status', 'active')
             ->orderBy('committee_name')
+            ->get();
+    }
+
+    public function getCusCorporatesForSelection()
+    {
+        return CusCorporate::select('id', 'company_vn', 'id_card', 'email')
+            ->where('status', 'active')
+            ->orderBy('company_vn')
             ->get();
     }
 
@@ -42,7 +50,8 @@ class SponsorshipService
     public function createSponsorship(array $data)
     {
         $sponsorship = Sponsorship::create([
-            'committee_id' => $data['committee_id'],
+            'committee_id' => $data['committee_id'] ?? null,
+            'cuscorporate_id' => $data['cuscorporate_id'] ?? null,
             'date' => $data['date'],
             'description' => $data['description'],
             'product' => $data['product'],

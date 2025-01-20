@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\Models\MemFee;
 use App\Models\Committees;
+use App\Models\CusCorporate;
+
 class MemFeeService
 {
     public function getCommitteesForSelection()
@@ -14,21 +16,30 @@ class MemFeeService
             ->get();
     }
 
+    public function getCusCorporatesForSelection()
+    {
+        return CusCorporate::select('id', 'company_vn', 'id_card', 'email')
+            ->where('status', 'active')
+            ->orderBy('company_vn')
+            ->get();
+    }
+
     public function createMemFee(array $data)
     {
         $memFee = MemFee::create([
-            'committee_id' => $data['committee_id'],
+            'committee_id' => $data['committee_id'] ?? null,
+            'cuscorporate_id' => $data['cuscorporate_id'] ?? null,
             'date' => $data['date'],
             'description' => $data['description'],
             'debt' => $data['debt'],
             'status' => 'unpaid'
         ]);
-
+    
         if (isset($data['attachment'])) {
             $memFee->addMedia($data['attachment'])
                 ->toMediaCollection('memfee_attachments');
         }
-
+    
         return $memFee;
     }
 
@@ -53,27 +64,27 @@ class MemFeeService
     public function getMemFeesWithCommittee($startDate = null, $endDate = null, $status = null, $search = null)
     {
         $query = MemFee::with('committee');
-        
+
         if ($startDate && $endDate) {
             $query->whereBetween('date', [$startDate, $endDate]);
         }
-    
+
         if ($status) {
             $query->where('status', $status);
         }
-    
+
         if ($search) {
-            $query->where(function($q) use ($search) {
-                $q->whereHas('committee', function($subQ) use ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->whereHas('committee', function ($subQ) use ($search) {
                     $subQ->where('committee_name', 'LIKE', "%{$search}%");
                 })
-                ->orWhere('description', 'LIKE', "%{$search}%")
-                ->orWhere('debt', 'LIKE', "%{$search}%")
-                ->orWhere('status', 'LIKE', "%{$search}%")
-                ->orWhere('date', 'LIKE', "%{$search}%");
+                    ->orWhere('description', 'LIKE', "%{$search}%")
+                    ->orWhere('debt', 'LIKE', "%{$search}%")
+                    ->orWhere('status', 'LIKE', "%{$search}%")
+                    ->orWhere('date', 'LIKE', "%{$search}%");
             });
         }
-        
+
         return $query->latest()->paginate(6);
     }
 }

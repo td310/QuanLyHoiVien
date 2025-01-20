@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class MemFee extends Model implements HasMedia
 {
     use InteractsWithMedia;
-    protected $table = 'memebership_fees';
+    protected $table = 'membership_fees';
 
     protected $fillable = [
         'date', 
@@ -17,12 +17,18 @@ class MemFee extends Model implements HasMedia
         'attachment', 
         'debt', 
         'status', 
-        'committee_id'
+        'committee_id',
+        'cuscorporate_id'
     ];
 
     public function committee()
     {
         return $this->belongsTo(Committees::class, 'committee_id');
+    }
+
+    public function cuscorporate()
+    {
+        return $this->belongsTo(CusCorporate::class, 'cuscorporate_id');
     }
 
     public function registerMediaCollections(): void

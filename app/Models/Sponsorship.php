@@ -19,12 +19,18 @@ class Sponsorship extends Model implements HasMedia
         'quantity',
         'total',
         'committee_id',
+        'cuscorporate_id',
         'attachment'
     ];
 
     public function committee()
     {
         return $this->belongsTo(Committees::class, 'committee_id');
+    }
+
+    public function cuscorporate()
+    {
+        return $this->belongsTo(CusCorporate::class, 'cuscorporate_id');
     }
 
     public function registerMediaCollections(): void

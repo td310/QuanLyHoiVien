@@ -9,13 +9,26 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Ban chấp hành</a></li>
+                            <li class="breadcrumb-item"><a href="">Hội phí</a></li>
                             <li class="breadcrumb-item active">Thêm mới</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+                @if ($errors->any() || session('error'))
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <p class="font-weight-bold">Errors:</p>
+                @foreach ($errors->all() as $error)
+                    <p class="mb-0">{{ $error }}</p>
+                @endforeach
+                @if(session('error'))
+                    <p class="mb-0">{{ session('error') }}</p>
+                @endif
+            </div>
+        </div>
+    @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -43,15 +56,46 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="row align-items-center mb-2">
-                                                    <label class="col-sm-4 col-form-label">Tên khách hàng</label>
+                                                    <label class="col-sm-4 col-form-label">Loại khách hàng</label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-control select2" id="committee_select" name="committee_id" required style="width: 100%;">
-                                                            <option value="">Chọn khách hàng</option>
+                                                        <select class="form-control" id="customer_type" name="customer_type">
+                                                            <option value="">Chọn loại khách hàng</option>
+                                                            <option value="committee">Ban chấp hành</option>
+                                                            <option value="corporate">Khách hàng doanh nghiệp</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group committee-select" style="display: none;">
+                                                <div class="row align-items-center mb-2">
+                                                    <label class="col-sm-4 col-form-label">Ban chấp hành</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" name="committee_id">
+                                                            <option value="">Chọn ban chấp hành</option>
                                                             @foreach ($committees as $committee)
                                                                 <option value="{{ $committee->id }}"
-                                                                        data-id-card="{{ $committee->id_card }}"
-                                                                        data-email="{{ $committee->email }}">
+                                                                    data-card="{{ $committee->id_card }}"
+                                                                    data-email="{{ $committee->email }}">
                                                                     {{ $committee->committee_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group corporate-select" style="display: none;">
+                                                <div class="row align-items-center mb-2">
+                                                    <label class="col-sm-4 col-form-label">Khách hàng doanh nghiệp</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" name="cuscorporate_id">
+                                                            <option value="">Chọn khách hàng doanh nghiệp</option>
+                                                            @foreach ($corporates as $corporate)
+                                                                <option value="{{ $corporate->id }}"
+                                                                    data-card="{{ $corporate->id_card }}"
+                                                                    data-email="{{ $corporate->email }}">
+                                                                    {{ $corporate->company_vn }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -108,8 +152,9 @@
                                                     <label class="col-sm-4 col-form-label">Đính kèm</label>
                                                     <div class="col-sm-8 input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="fileInput"
-                                                                name="attachment" onchange="displayFileName(this)">
+                                                            <input type="file" class="custom-file-input"
+                                                                id="fileInput" name="attachment"
+                                                                onchange="displayFileName(this)">
                                                             <label for="fileInput" id="fileInputLabel"
                                                                 class="custom-file-label">Chọn tệp đính kèm</label>
                                                         </div>
@@ -133,11 +178,23 @@
     </div><!-- /.container-fluid -->
     </section>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.getElementById('committee_select').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            document.getElementById('id_card').value = selectedOption.dataset.idCard;
-            document.getElementById('email').value = selectedOption.dataset.email;
+        $(document).ready(function() {
+            $('#customer_type').change(function() {
+                $('.committee-select, .corporate-select').hide();
+                if ($(this).val() === 'committee') {
+                    $('.committee-select').show();
+                } else if ($(this).val() === 'corporate') {
+                    $('.corporate-select').show();
+                }
+            });
+
+            $('select[name="committee_id"], select[name="cuscorporate_id"]').change(function() {
+                var selectedOption = $(this).find('option:selected');
+                $('#id_card').val(selectedOption.data('card'));
+                $('#email').val(selectedOption.data('email'));
+            });
         });
     </script>
     <script>

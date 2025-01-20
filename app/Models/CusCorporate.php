@@ -69,4 +69,24 @@ class CusCorporate extends Model
     {
         return $this->hasMany(ConnectionManager::class);
     }
+    //Hội phí và tài trợ
+    public function memFees()
+    {
+        return $this->hasMany(MemFee::class, 'cuscorporate_id');
+    }
+
+    public function sponsorships()
+    {
+        return $this->hasMany(Sponsorship::class, 'cuscorporate_id');
+    }
+
+    public function getTotalDebtAttribute()
+    {
+        return $this->memFees()->sum('debt');
+    }
+
+    public function getTotalSponsorshipAttribute()
+    {
+        return $this->sponsorships()->sum('total');
+    }
 }
