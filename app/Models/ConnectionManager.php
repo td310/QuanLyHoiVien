@@ -14,7 +14,8 @@ class ConnectionManager extends Model
         'email_connection',
         'is_leader',
         'club_id',
-        'cus_corporate_id'
+        'cus_corporate_id',
+        'partner_id'
     ];
 
     public function club()
@@ -25,5 +26,10 @@ class ConnectionManager extends Model
     public function cusCorporate()
     {
         return $this->belongsTo(CusCorporate::class);
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
     }
 }

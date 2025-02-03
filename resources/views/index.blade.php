@@ -111,7 +111,10 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.customer_partner') }}"
-                                        class="nav-link {{ request()->routeIs('*.customer_partner') || request()->routeIs('*.customer_corporate') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('*.customer_partner') || 
+                                            request()->routeIs('*.customer_corporate') || 
+                                            request()->routeIs('*.customer_personal') || 
+                                            request()->routeIs('*.partner') ? 'active' : '' }}">
                                         <p>Khách hàng & Đối tác</p>
                                     </a>
                                 </li>

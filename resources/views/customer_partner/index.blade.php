@@ -25,13 +25,13 @@
                     class="nav-link {{ request()->routeIs('index.customer_corporate') ? 'active' : '' }}">
                     <i class="fas fa-building mr-1"></i> Khách hàng doanh nghiệp
                 </a>
-                <a href=""
-                    class="nav-link">
+                <a href="{{ route('index.customer_personal') }}"
+                    class="nav-link {{ request()->routeIs('index.customer_personal') ? 'active' : '' }}">
                     <i class="fas fa-user mr-1"></i> Khách hàng cá nhân
                 </a>
-                <a href=""
-                    class="nav-link">
-                    <i class="fas fa-handshake mr-1"></i> Đối tác
+                <a href="{{ route('index.partner') }}"
+                    class="nav-link {{ request()->routeIs('index.partner') ? 'active' : '' }}">
+                    <i class="fas fa-handshake mr-1"></i> Đối tác doanh nghiệp
                 </a>
             </div>
             <div class="container-fluid">

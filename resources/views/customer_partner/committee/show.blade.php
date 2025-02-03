@@ -24,24 +24,8 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Chỉnh sửa ban chấp hành</h3>
+                                <h3 class="card-title">Chi tiết ban chấp hành</h3>
                             </div>
-                            <!-- /.card-header -->
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <div class="card-body">
                                 <div class="row">
                                     <div class="card col-md-6">

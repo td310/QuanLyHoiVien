@@ -15,6 +15,8 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\MemLevelController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\PersonalCustomerController;
+use App\Http\Controllers\PartnerController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -71,6 +73,30 @@ Route::prefix('customer-corporate')->group(function () {
     Route::post('/store', [CusCorporateController::class, 'store'])->name('store.customer_corporate');
     Route::put('/update/{id}', [CusCorporateController::class, 'update'])->name('update.customer_corporate');
     Route::delete('/destroy/{id}', [CusCorporateController::class, 'destroy'])->name('destroy.customer_corporate');
+});
+
+//Khách hàng cá nhân
+Route::prefix('customer-personal')->group(function () {
+    Route::get('/', [PersonalCustomerController::class, 'index'])->name('index.customer_personal');
+    Route::get('/create', [PersonalCustomerController::class, 'create'])->name('create.customer_personal');
+    Route::get('/edit/{id}', [PersonalCustomerController::class, 'edit'])->name('edit.customer_personal');
+    Route::get('/show/{id}', [PersonalCustomerController::class, 'show'])->name('show.customer_personal');
+
+    Route::post('/store', [PersonalCustomerController::class, 'store'])->name('store.customer_personal');
+    Route::delete('/delete/{id}', [PersonalCustomerController::class, 'destroy'])->name('delete.customer_personal');
+    Route::put('/update/{id}', [PersonalCustomerController::class, 'update'])->name('update.customer_personal');
+});
+
+//đối tác doanh nghiệp
+Route::prefix('partner')->group(function () {
+    Route::get('/', [PartnerController::class, 'index'])->name('index.partner');
+    Route::get('/create', [PartnerController::class, 'create'])->name('create.partner');
+    Route::get('/edit/{id}', [PartnerController::class, 'edit'])->name('edit.partner');
+    Route::get('/show/{id}', [PartnerController::class, 'show'])->name('show.partner');
+
+    Route::post('/store', [PartnerController::class, 'store'])->name('store.partner');
+    Route::delete('/delete/{id}', [PartnerController::class, 'destroy'])->name('delete.partner');
+    Route::put('/update/{id}', [PartnerController::class, 'update'])->name('update.partner');
 });
 
 //Hội Phí
