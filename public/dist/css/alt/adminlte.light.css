@@ -10631,8 +10631,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .preloader {
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   background-color: #f4f6f9;
   height: 100vh;
   width: 100%;

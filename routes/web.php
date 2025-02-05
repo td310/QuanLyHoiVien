@@ -17,6 +17,7 @@ use App\Http\Controllers\MemLevelController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\PersonalCustomerController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\NotificationController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -97,6 +98,18 @@ Route::prefix('partner')->group(function () {
     Route::post('/store', [PartnerController::class, 'store'])->name('store.partner');
     Route::delete('/delete/{id}', [PartnerController::class, 'destroy'])->name('delete.partner');
     Route::put('/update/{id}', [PartnerController::class, 'update'])->name('update.partner');
+});
+
+//Thông báo
+Route::prefix('notification')->group(function () {
+    Route::get('/', [NotificationController::class, 'index'])->name('index.notification');
+    Route::get('/create', [NotificationController::class, 'create'])->name('create.notification');
+    Route::get('/edit/{id}', [NotificationController::class, 'edit'])->name('edit.notification');
+    Route::get('/show/{id}', [NotificationController::class, 'show'])->name('show.notification');
+
+    Route::post('/store', [NotificationController::class, 'store'])->name('store.notification');
+    Route::delete('/delete/{id}', [NotificationController::class, 'destroy'])->name('delete.notification');
+    Route::put('/update/{id}', [NotificationController::class, 'update'])->name('update.notification');
 });
 
 //Hội Phí

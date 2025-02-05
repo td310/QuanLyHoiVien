@@ -111,10 +111,12 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.customer_partner') }}"
-                                        class="nav-link {{ request()->routeIs('*.customer_partner') || 
-                                            request()->routeIs('*.customer_corporate') || 
-                                            request()->routeIs('*.customer_personal') || 
-                                            request()->routeIs('*.partner') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('*.customer_partner') ||
+                                        request()->routeIs('*.customer_corporate') ||
+                                        request()->routeIs('*.customer_personal') ||
+                                        request()->routeIs('*.partner')
+                                            ? 'active'
+                                            : '' }}">
                                         <p>Khách hàng & Đối tác</p>
                                     </a>
                                 </li>
@@ -131,15 +133,18 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.sponsorship') }}"
-                                        class="nav-link {{ request()->routeIs('index.sponsorship') || 
-                                            (str_contains(Route::currentRouteName(), 'sponsorship') && 
-                                            !str_contains(Route::currentRouteName(), 'customer_partner') && 
-                                            !str_contains(Route::currentRouteName(), 'customer_corporate')) ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('index.sponsorship') ||
+                                        (str_contains(Route::currentRouteName(), 'sponsorship') &&
+                                            !str_contains(Route::currentRouteName(), 'customer_partner') &&
+                                            !str_contains(Route::currentRouteName(), 'customer_corporate'))
+                                            ? 'active'
+                                            : '' }}">
                                         <p>Tài trợ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('index.notification') }}"
+                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'notification') ? 'active' : '' }}">
                                         <p>Thông báo</p>
                                     </a>
                                 </li>
@@ -157,7 +162,7 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="{{route('index.membership_level')}}" class="nav-link">
+                                            <a href="{{ route('index.membership_level') }}" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Hạng thành viên</p>
                                             </a>
@@ -169,7 +174,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{route('index.major')}}" class="nav-link">
+                                            <a href="{{ route('index.major') }}" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Danh mục</p>
                                             </a>

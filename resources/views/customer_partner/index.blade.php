@@ -31,7 +31,7 @@
                 </a>
                 <a href="{{ route('index.partner') }}"
                     class="nav-link {{ request()->routeIs('index.partner') ? 'active' : '' }}">
-                    <i class="fas fa-handshake mr-1"></i> Đối tác doanh nghiệp
+                    <i class="fas fa-handshake mr-1"></i> Đối tác
                 </a>
             </div>
             <div class="container-fluid">

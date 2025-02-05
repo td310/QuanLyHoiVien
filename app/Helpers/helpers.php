@@ -22,3 +22,10 @@ if (!function_exists('format_day_month')) {
         return Carbon::parse($date)->format('d/m');
     }
 }
+
+if (!function_exists('format_notification_date')) {
+    function format_notification_date($date)
+    {
+        return Carbon::parse($date)->format('H:i d/m/Y');
+    }
+}
