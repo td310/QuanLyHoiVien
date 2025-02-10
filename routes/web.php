@@ -18,6 +18,8 @@ use App\Http\Controllers\ClubController;
 use App\Http\Controllers\PersonalCustomerController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ActivityController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -110,6 +112,32 @@ Route::prefix('notification')->group(function () {
     Route::post('/store', [NotificationController::class, 'store'])->name('store.notification');
     Route::delete('/delete/{id}', [NotificationController::class, 'destroy'])->name('delete.notification');
     Route::put('/update/{id}', [NotificationController::class, 'update'])->name('update.notification');
+});
+
+//Lịch họp
+Route::prefix('calendar')->group(function () {
+    Route::get('/', [CalendarController::class, 'index'])->name('index.calendar');
+    Route::get('/create', [CalendarController::class, 'create'])->name('create.calendar');
+    Route::get('/edit/{id}', [CalendarController::class, 'edit'])->name('edit.calendar');
+    Route::get('/show/{id}', [CalendarController::class, 'show'])->name('show.calendar');
+
+    Route::post('/store', [CalendarController::class, 'store'])->name('store.calendar');
+    Route::delete('/delete/{id}', [CalendarController::class, 'destroy'])->name('delete.calendar');
+    Route::put('/update/{id}', [CalendarController::class, 'update'])->name('update.calendar');
+    Route::get('/events', [CalendarController::class, 'getEvents'])->name('calendar.events');
+});
+
+//Hoạt động
+Route::prefix('activity')->group(function () {
+    Route::get('/', [ActivityController::class, 'index'])->name('index.activity');
+    Route::get('/create', [ActivityController::class, 'create'])->name('create.activity');
+    Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('edit.activity');
+    Route::get('/show/{id}', [ActivityController::class, 'show'])->name('show.activity');
+    Route::get('/showCustomer/{id}', [ActivityController::class, 'showCustomers'])->name('showCustomer.activity');
+
+    Route::post('/store', [ActivityController::class, 'store'])->name('store.activity');
+    Route::delete('/delete/{id}', [ActivityController::class, 'destroy'])->name('delete.activity');
+    Route::put('/update/{id}', [ActivityController::class, 'update'])->name('update.activity');
 });
 
 //Hội Phí

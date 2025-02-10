@@ -31,6 +31,11 @@
     <link rel="stylesheet" href="{{ asset('css/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="{{ asset('css/fullcalendar/main.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -121,7 +126,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('index.activity') }}"
+                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'activity') ? 'active' : '' }}">
                                         <p>Hoạt động</p>
                                     </a>
                                 </li>
@@ -149,7 +155,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('index.calendar') }}"
+                                        class="nav-link {{ str_contains(Route::currentRouteName(), 'calendar') ? 'active' : '' }}">
                                         <p>Lịch</p>
                                     </a>
                                 </li>
@@ -241,6 +248,8 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('css/fullcalendar/main.js') }}"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('index.notification') }}">Thông báo</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item active">Chỉnh sửa</li>
                         </ol>
                     </div>
                 </div>
@@ -24,76 +24,62 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Thêm thông báo mới</h3>
+                                <h3 class="card-title">Chỉnh sửa thông báo</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{ route('update.notification', $notification->id) }}" method="POST">
+                            <form action="{{ route('update.calendar', $calendar->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="row align-items-center mb-2">
-                                                    <label class="col-sm-2 col-form-label">Tiêu đề</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" name="title"
-                                                            value="{{ $notification->title }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group">
                                                         <div class="row align-items-center mb-2">
-                                                            <label class="col-sm-4 col-form-label">Hình thức</label>
-                                                            <div class="d-flex col-sm-8">
-                                                                <div class="form-check mr-3">
-                                                                    <input type="radio" name="method" value="email"
-                                                                        class="form-check-input"
-                                                                        {{ $notification->method == 'email' ? 'checked' : '' }}>
-                                                                    <label class="form-check-label">Email</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" name="method"
-                                                                        value="notification" class="form-check-input"
-                                                                        {{ $notification->method == 'notification' ? 'checked' : '' }}>
-                                                                    <label class="form-check-label">Notification</label>
-                                                                </div>
+                                                            <label class="col-sm-3 col-form-label">Người chủ trì</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" name="host"
+                                                                    value="{{ $calendar->host }}">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <div class="row align-items-center mb-2">
-                                                            <label class="col-sm-4 col-form-label">Thời gian gửi</label>
-                                                            <div class="d-flex col-sm-8">
-                                                                <div class="form-check mr-3">
-                                                                    <input type="radio" name="date" value="now"
-                                                                        class="form-check-input"
-                                                                        {{ $notification->date == now()->format('Y-m-d H:i:s') ? 'checked' : '' }}>
-                                                                    <label class="form-check-label">Ngay lập tức</label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input type="radio" name="date" value="custom"
-                                                                        class="form-check-input"
-                                                                        {{ $notification->date != now()->format('Y-m-d H:i:s') ? 'checked' : '' }}>
-                                                                    <label class="form-check-label">Tùy chọn</label>
-                                                                </div>
+                                                            <label class="col-sm-3 col-form-label">Tiêu đề</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" name="title"
+                                                                    value="{{ $calendar->title }}">
                                                             </div>
                                                         </div>
-                                                        <div id="custom-date" class="mt-2"
-                                                            style="display: {{ $notification->date != now()->format('Y-m-d H:i:s') ? 'block' : 'none' }}">
-                                                            <input type="datetime-local" name="date_custom"
-                                                                class="form-control" value="{{ $notification->date }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row align-items-center mb-2">
+                                                            <label class="col-sm-3 col-form-label">Nội dung</label>
+                                                            <div class="col-sm-9">
+                                                                <textarea id="description" name="description" class="form-control" rows="4">{{ $calendar->description }}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row align-items-center mb-2">
-                                                    <label class="col-sm-2 col-form-label">Nội dung</label>
-                                                    <div class="col-sm-10">
-                                                        <textarea id="content" name="description" class="form-control">{{ old('description') }}</textarea>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="row align-items-center mb-2">
+                                                            <label class="col-sm-3 col-form-label">Địa điểm</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" name="location"
+                                                                    value="{{ $calendar->location }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row align-items-center mb-2">
+                                                            <label class="col-sm-3 col-form-label">Thời gian</label>
+                                                            <div class="col-sm-9">
+                                                                <input id="datetime-input" type="text" name="date"
+                                                                    class="form-control" value="{{ $calendar->date }}">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,35 +193,33 @@
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
-                                                @if ($recipients->contains('customer_type', 'manual'))
-                                                    <tbody id="manualEmailSection"
-                                                        style="display: {{ $recipients->contains('customer_type', 'manual') ? 'table-row-group' : 'none' }}">
-                                                        <tr>
-                                                            <td>
-                                                                <input type="checkbox" name="manual_email_checkbox"
-                                                                    class="row-checkbox"
-                                                                    {{ $recipients->contains('customer_type', 'manual') ? 'checked' : '' }}>
-                                                            </td>
-                                                            <td colspan="3">Khác</td>
-                                                            <td>
-                                                                <input type="email" name="manual_email"
-                                                                    class="form-control"
-                                                                    value="{{ optional($recipients->where('customer_type', 'manual')->first())->manual_email }}">
-                                                            </td>
-                                                            <td colspan="5">-</td>
-                                                        </tr>
-                                                    </tbody>
-                                                @endif
+                                                <tbody id="manualEmailSection"
+                                                    style="display: {{ $calendar->manual_email ? 'table-row-group' : 'none' }}">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" name="manual_email_checkbox"
+                                                                class="row-checkbox"
+                                                                {{ $calendar->manual_email ? 'checked' : '' }}>
+                                                        </td>
+                                                        <td colspan="3">Khác</td>
+                                                        <td>
+                                                            <input type="email" name="manual_email" class="form-control"
+                                                                value="{{ $calendar->manual_email }}">
+                                                        </td>
+                                                        <td colspan="5">-</td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
-                                            <button type="button" class="btn btn-primary" id="addEmailBtn">Thêm
-                                                email</button>
+                                            <button type="button" class="btn btn-primary mb-3" id="addEmailBtn">
+                                                {{ $calendar->manual_email ? 'Sửa email' : 'Thêm email' }}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="card-footer d-flex justify-content-center">
-                                    <a class="btn btn-secondary  mr-2" href="{{ route('index.notification') }}">Đóng</a>
-                                    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                                    <button type="submit" class="btn btn-primary  mr-2">Chỉnh sửa</button>
+                                    <a class="btn btn-secondary" href="{{ route('index.calendar') }}">Đóng</a>
                                 </div>
                             </form>
                         </div>
@@ -244,44 +228,33 @@
             </div>
         </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('input[name="date"]').change(function() {
-                if ($(this).val() === 'custom') {
-                    $('#custom-date').show();
-                } else {
-                    $('#custom-date').hide();
-                }
-            });
-
-            $('#select-all').change(function() {
-                $('.row-checkbox').prop('checked', this.checked);
-            });
-        });
-
-        $(document).ready(function() {
-            $('#content').summernote({
-                placeholder: 'Nội dung thông báo',
-                height: 200,
-                tabsize: 2,
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview']]
-                ]
-            });
-        });
-
         $(document).ready(function() {
             $('#addEmailBtn').click(function() {
                 $('#manualEmailSection').toggle();
             });
 
+            $('input[name="manual_email_checkbox"]').change(function() {
+                if (!this.checked) {
+                    $('input[name="manual_email"]').val('');
+                }
+            });
+        });
+        $(document).ready(function() {
             $('#select-all').change(function() {
                 $('.row-checkbox').prop('checked', this.checked);
             });
+        });
+    </script>
+    <script>
+        flatpickr("#datetime-input", {
+            enableTime: true,
+            dateFormat: "Y-m-d h:i K",
+            time_24hr: false,
+            minDate: new Date(),
+            allowInput: true
         });
     </script>
 @endsection

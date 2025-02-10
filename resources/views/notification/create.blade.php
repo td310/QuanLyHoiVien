@@ -117,53 +117,43 @@
                                             </div>
 
                                             <label class="col-sm-2 col-form-label">Người nhận</label>
-                                            {{-- <div class="d-flex align-items-center justify-content-between p-4">
-                                                <form action="" method="GET">
-                                                    <div class="left-section">
-                                                        <label>Loại thành viên</label>
-                                                        <select name="" class="form-control" style="width: 200px;"
-                                                            onchange="this.form.submit()">
-                                                            <option value="">Tất cả</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <form action="" method="GET">
-                                                    <div class="left-section">
-                                                        <label>Lĩnh vực</label>
-                                                        <select name="" class="form-control" style="width: 200px;"
-                                                            onchange="this.form.submit()">
-                                                            <option value="">Tất cả</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <form action="" method="GET">
-                                                    <div class="left-section">
-                                                        <label>Thị trường</label>
-                                                        <select name="" class="form-control" style="width: 200px;"
-                                                            onchange="this.form.submit()">
-                                                            <option value="">Tất cả</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <form action="" method="GET">
-                                                    <div class="left-section">
-                                                        <label>Khách hàng mục tiêu</label>
-                                                        <select name="" class="form-control" style="width: 200px;"
-                                                            onchange="this.form.submit()">
-                                                            <option value="">Tất cả</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <form action="" method="GET">
-                                                    <div class="left-section">
-                                                        <label>Quy mô</label>
-                                                        <select name="" class="form-control" style="width: 200px;"
-                                                            onchange="this.form.submit()">
-                                                            <option value="">Tất cả</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                            </div> --}}
+                                            <div class="d-flex align-items-center justify-content-between p-4">
+                                                <div class="left-section">
+                                                    <label>Loại thành viên</label>
+                                                    <select name="" class="form-control" style="width: 200px;"
+                                                        onchange="this.form.submit()">
+                                                        <option value="">Tất cả</option>
+                                                    </select>
+                                                </div>
+                                                <div class="left-section">
+                                                    <label>Lĩnh vực</label>
+                                                    <select name="" class="form-control" style="width: 200px;"
+                                                        onchange="this.form.submit()">
+                                                        <option value="">Tất cả</option>
+                                                    </select>
+                                                </div>
+                                                <div class="left-section">
+                                                    <label>Thị trường</label>
+                                                    <select name="" class="form-control" style="width: 200px;"
+                                                        onchange="this.form.submit()">
+                                                        <option value="">Tất cả</option>
+                                                    </select>
+                                                </div>
+                                                <div class="left-section">
+                                                    <label>Khách hàng mục tiêu</label>
+                                                    <select name="" class="form-control" style="width: 200px;"
+                                                        onchange="this.form.submit()">
+                                                        <option value="">Tất cả</option>
+                                                    </select>
+                                                </div>
+                                                <div class="left-section">
+                                                    <label>Quy mô</label>
+                                                    <select name="" class="form-control" style="width: 200px;"
+                                                        onchange="this.form.submit()">
+                                                        <option value="">Tất cả</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
                                             <table class="table table-bordered table-hover">
                                                 <thead>
@@ -184,8 +174,9 @@
                                                     @foreach ($committees as $key => $committee)
                                                         <tr>
                                                             <td>
-                                                                <input type="checkbox" name="selected[]" 
-                                                                    value="committee_{{ $committee->id }}" class="row-checkbox">
+                                                                <input type="checkbox" name="selected[]"
+                                                                    value="committee_{{ $committee->id }}"
+                                                                    class="row-checkbox">
                                                             </td>
                                                             <td>{{ $key + 1 }}</td>
                                                             <td>{{ $committee->id_login }}</td>
@@ -202,8 +193,9 @@
                                                     @foreach ($corporates as $corporate)
                                                         <tr>
                                                             <td>
-                                                                <input type="checkbox" name="selected[]" 
-                                                                    value="corporate_{{ $corporate->id }}" class="row-checkbox">
+                                                                <input type="checkbox" name="selected[]"
+                                                                    value="corporate_{{ $corporate->id }}"
+                                                                    class="row-checkbox">
                                                             </td>
                                                             <td>{{ $loop->iteration + $committees->count() }}</td>
                                                             <td>{{ $corporate->id_login }}</td>
@@ -221,8 +213,9 @@
                                                     @foreach ($personals as $personal)
                                                         <tr>
                                                             <td>
-                                                                <input type="checkbox" name="selected[]" 
-                                                                    value="personal_{{ $personal->id }}" class="row-checkbox">
+                                                                <input type="checkbox" name="selected[]"
+                                                                    value="personal_{{ $personal->id }}"
+                                                                    class="row-checkbox">
                                                             </td>
                                                             <td>{{ $loop->iteration + $committees->count() + $corporates->count() }}
                                                             </td>
@@ -240,8 +233,9 @@
                                                     @foreach ($partners as $partner)
                                                         <tr>
                                                             <td>
-                                                                <input type="checkbox" name="selected[]" 
-                                                                    value="partner_{{ $partner->id }}" class="row-checkbox">
+                                                                <input type="checkbox" name="selected[]"
+                                                                    value="partner_{{ $partner->id }}"
+                                                                    class="row-checkbox">
                                                             </td>
                                                             <td>{{ $loop->iteration + $committees->count() + $corporates->count() + $personals->count() }}
                                                             </td>
