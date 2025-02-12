@@ -37,14 +37,24 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
+<style>
+    .brand-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.8125rem 0.5rem;
+        min-height: 4rem;
+        border-bottom: 1px solid #4f5962;
+    }
+</style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
-                height="60" width="60">
+            <img class="animation__shake" src="{{ asset('dist/img/AltaLogo.png') }}" alt="AdminLTELogo" height="60"
+                width="60">
         </div>
 
         <!-- Navbar -->
@@ -67,31 +77,25 @@
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile') }}">
-                            {{ Auth::user()->name }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="nav-link btn btn-link">
-                                <i class="bi bi-box-arrow-right"></i> Logout
-                            </button>
-                        </form>
-                    </li>
+                <li class="nav-item d-flex align-items-center">
+                    <img src="{{ Auth::user()->getFirstMediaUrl('avatar') ? Auth::user()->getFirstMediaUrl('avatar') : asset('dist/img/avatar.png') }}" 
+                         class="img-circle" 
+                         alt="User Image" 
+                         style="width: 30px; height: 30px; object-fit: cover;">
+                    <a class="nav-link" href="{{ route('profile') }}">
+                        {{ Auth::user()->name }}
+                    </a>
+                </li>
                 @endguest
             </ul>
         </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-3">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <a href="" class="brand-link">
+                <img src="{{ asset('dist/img/AltaLogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle">
             </a>
 
             <!-- Sidebar -->
@@ -105,13 +109,13 @@
                                 <li class="nav-item">
                                     <a href="{{ route('main_index') }}"
                                         class="nav-link {{ Route::is(['main_index']) ? 'active' : '' }}">
-                                        <p>Trang chủ</p>
+                                        <p class="nav-item-sidebar">Trang chủ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.club') }}"
                                         class="nav-link {{ str_contains(Route::currentRouteName(), 'club') ? 'active' : '' }}">
-                                        <p>Câu lạc bộ</p>
+                                        <p class="nav-item-sidebar">Câu lạc bộ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -122,19 +126,19 @@
                                         request()->routeIs('*.partner')
                                             ? 'active'
                                             : '' }}">
-                                        <p>Khách hàng & Đối tác</p>
+                                        <p class="nav-item-sidebar">Khách hàng & Đối tác</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.activity') }}"
                                         class="nav-link {{ str_contains(Route::currentRouteName(), 'activity') ? 'active' : '' }}">
-                                        <p>Hoạt động</p>
+                                        <p class="nav-item-sidebar">Hoạt động</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.membership_fee') }}"
                                         class="nav-link {{ str_contains(Route::currentRouteName(), 'membership_fee') ? 'active' : '' }}">
-                                        <p>Hội Phí</p>
+                                        <p class="nav-item-sidebar">Hội Phí</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -145,13 +149,13 @@
                                             !str_contains(Route::currentRouteName(), 'customer_corporate'))
                                             ? 'active'
                                             : '' }}">
-                                        <p>Tài trợ</p>
+                                        <p class="nav-item-sidebar">Tài trợ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('index.notification') }}"
                                         class="nav-link {{ str_contains(Route::currentRouteName(), 'notification') ? 'active' : '' }}">
-                                        <p>Thông báo</p>
+                                        <p class="nav-item-sidebar">Thông báo</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -160,29 +164,37 @@
                                         <p>Lịch</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <p>
+                                @php
+                                    $settingsRoutes = ['index.membership_level', 'index.role', 'index.major'];
+                                    $isSettingsActive = in_array(Route::currentRouteName(), $settingsRoutes);
+                                @endphp
+
+                                <li class="nav-item {{ $isSettingsActive ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link {{ $isSettingsActive ? 'active' : '' }}">
+                                        <p class="nav-item-sidebar">
                                             Cài đặt
                                             <i class="fas fa-angle-left right"></i>
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="{{ route('index.membership_level') }}" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                            <a href="{{ route('index.membership_level') }}"
+                                                class="nav-link {{ Route::currentRouteName() == 'index.membership_level' ? 'active' : '' }}">
+                                                <i class="nav-icon"></i>
                                                 <p>Hạng thành viên</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                            <a href="{{ route('index.role') }}"
+                                                class="nav-link {{ Route::currentRouteName() == 'index.role' ? 'active' : '' }}">
+                                                <i class="nav-icon"></i>
                                                 <p>Quản lý người dùng</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('index.major') }}" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                            <a href="{{ route('index.major') }}"
+                                                class="nav-link {{ Route::currentRouteName() == 'index.major' ? 'active' : '' }}">
+                                                <i class="nav-icon"></i>
                                                 <p>Danh mục</p>
                                             </a>
                                         </li>
@@ -269,23 +281,6 @@
                         avatarForm.submit();
                     }
                 });
-            }
-
-            function togglePassword() {
-                const passwordInput = document.getElementById('password');
-                const toggleIcon = document.getElementById('togglePassword');
-
-                if (passwordInput && toggleIcon) {
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        toggleIcon.classList.remove('fa-eye');
-                        toggleIcon.classList.add('fa-eye-slash');
-                    } else {
-                        passwordInput.type = 'password';
-                        toggleIcon.classList.remove('fa-eye-slash');
-                        toggleIcon.classList.add('fa-eye');
-                    }
-                }
             }
         });
     </script>

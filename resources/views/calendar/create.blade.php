@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách lịch họp</h1>
+                        <h1 class="title-alta">Danh sách lịch họp</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -16,19 +16,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        @if ($errors->any() || session('error'))
-            <div class="card-body">
-                <div class="alert alert-danger">
-                    <p class="font-weight-bold">Errors:</p>
-                    @foreach ($errors->all() as $error)
-                        <p class="mb-0">{{ $error }}</p>
-                    @endforeach
-                    @if (session('error'))
-                        <p class="mb-0">{{ session('error') }}</p>
-                    @endif
-                </div>
-            </div>
-        @endif
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">

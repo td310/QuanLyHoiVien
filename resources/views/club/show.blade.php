@@ -5,12 +5,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách câu lạc bộ</h1>
+                        <h1 class="title-alta">Chi tiết câu lạc bộ</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">Câu lạc bộ</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item active">Chi tiết</li>
                         </ol>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Thêm câu lạc bộ</h3>
+                                <h3 class="card-title">Chi tiết câu lạc bộ</h3>
                             </div>
                             <!-- /.card-header -->
                             <form action="{{ route('store.club') }}" method="POST" enctype="multipart/form-data">

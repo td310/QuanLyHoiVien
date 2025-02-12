@@ -267,9 +267,10 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary  mr-2">Thêm</button>
+                                    <a class="btn btn-secondary" href="{{route('index.customer_personal')}}">Đóng</a>
+                                </div>>
                             </form>
                         </div>
                         <!-- /.card -->

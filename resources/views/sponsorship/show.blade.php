@@ -38,7 +38,8 @@
                                                     <label class="col-sm-4 col-form-label">Người tài trợ</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control"
-                                                            value="{{ $sponsorships->committee->committee_name }}" readonly>
+                                                            value="{{ $sponsorships->committee ? $sponsorships->committee->committee_name : ($sponsorships->cuscorporate ? $sponsorships->cuscorporate->company_vn : '') }}"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -47,7 +48,7 @@
                                                     <label class="col-sm-4 col-form-label">Mã khách hàng</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control"
-                                                            value="{{ $sponsorships->committee->id_card }}" readonly>
+                                                            value="{{ $sponsorships->committee ? $sponsorships->committee->id_card : ($sponsorships->cuscorporate ? $sponsorships->cuscorporate->id_card : '')}}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -56,7 +57,7 @@
                                                     <label class="col-sm-4 col-form-label">Email</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control"
-                                                            value="{{ $sponsorships->committee->email }}" readonly>
+                                                            value="{{ $sponsorships->committee ? $sponsorships->committee->email : ($sponsorships->cuscorporate ? $sponsorships->cuscorporate->email : '')}}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,9 +145,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>

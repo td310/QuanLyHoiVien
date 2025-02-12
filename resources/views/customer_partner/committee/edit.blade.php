@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách khách hàng</h1>
+                        <h1 class="title-alta">Chỉnh sửa ban chấp hành</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -23,25 +23,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chỉnh sửa ban chấp hành</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <form action="{{ route('update.customer_partner', $committee->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -254,8 +235,9 @@
                                     </div>
                                     <!-- /.card-body -->
 
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="card-footer d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary mr-2">Chỉnh sửa</button>
+                                        <a class="btn btn-secondary" href="{{ route('index.customer_partner') }}">Đóng</a>
                                     </div>
                             </form>
                         </div>

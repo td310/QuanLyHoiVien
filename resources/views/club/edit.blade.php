@@ -1,31 +1,16 @@
 @extends('index')
 @section('content')
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách câu lạc bộ</h1>
+                        <h1 class="title-alta">Chỉnh sửa câu lạc bộ</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">Câu lạc bộ</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item active">Chỉnh sửa</li>
                         </ol>
                     </div>
                 </div>
@@ -39,7 +24,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Thêm câu lạc bộ</h3>
+                                <h3 class="card-title">Chỉnh sửa lạc bộ</h3>
                             </div>
                             <!-- /.card-header -->
                             <form action="{{ route('update.club', $club->id) }}" method="POST" enctype="multipart/form-data">
@@ -316,8 +301,8 @@
                                 </div>
 
                                 <div class="card-footer d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
-                                    <a class="btn btn-secondary  mr-2" href="{{ route('index.club') }}">Đóng</a>
+                                    <button type="submit" class="btn btn-primary mr-2">Chỉnh sửa</button>
+                                    <a class="btn btn-secondary" href="{{ route('index.club') }}">Đóng</a>
                                 </div>
                             </form>
                         </div>

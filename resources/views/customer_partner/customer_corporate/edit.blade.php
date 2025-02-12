@@ -561,7 +561,7 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary  mr-2">Chỉnh sửa</button>
-                                    <a class="btn btn-secondary" href="">Đóng</a>
+                                    <a class="btn btn-secondary" href="{{route('index.customer_corporate')}}">Đóng</a>
                                 </div>
                             </form>
                         </div>

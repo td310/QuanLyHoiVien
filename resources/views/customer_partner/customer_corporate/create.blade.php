@@ -581,8 +581,9 @@
                                 </div>
                                 <!-- /.card-body -->
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <a class="btn btn-secondary  mr-2" href="{{ route('index.customer_corporate') }}">Đóng</a>
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
                                 </div>
                             </form>
                         </div>

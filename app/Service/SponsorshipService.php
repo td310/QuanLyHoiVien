@@ -71,7 +71,7 @@ class SponsorshipService
 
     public function getSponsorshipDetails($id)
     {
-        return Sponsorship::with('committee')->findOrFail($id);
+        return Sponsorship::with(['committee', 'cuscorporate'])->findOrFail($id);
     }
 
     public function deleteSponsorship($id)

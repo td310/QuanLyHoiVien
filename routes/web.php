@@ -20,12 +20,17 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DocumentController;
 
+Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('index');
-    })->name('main_index');
+    Route::get('/', [DocumentController::class, 'index'])->name('main_index');
 });
+Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+Route::get('/documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
+
+
 
 
 Route::middleware(['guest'])->group(function () {
@@ -37,7 +42,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/reset-password/{email}', [UserController::class, 'getforgotpassword'])->name('getforgotpassword');
 });
 
-Route::prefix('account')->group(function () {  
+Route::prefix('account')->group(function () {
     Route::post('/register', [UserController::class, 'userRegister'])->name('userRegister');
     Route::post('/login', [UserController::class, 'userLogin'])->name('userLogin');
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
@@ -140,6 +145,18 @@ Route::prefix('activity')->group(function () {
     Route::put('/update/{id}', [ActivityController::class, 'update'])->name('update.activity');
 });
 
+//Phân quyền
+Route::prefix('role')->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->name('index.role');
+    Route::get('/create', [RoleController::class, 'create'])->name('create.role');
+    Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit.role');
+    Route::get('/show/{id}', [RoleController::class, 'show'])->name('show.role');
+
+    Route::post('/store', [RoleController::class, 'store'])->name('store.role');
+    Route::delete('/delete/{id}', [RoleController::class, 'destroy'])->name('delete.role');
+    Route::put('/update/{id}', [RoleController::class, 'update'])->name('update.role');
+});
+
 //Hội Phí
 Route::prefix('membership-fee')->group(function () {
     Route::get('/', [MemFeeController::class, 'index'])->name('index.membership_fee');
@@ -167,7 +184,7 @@ Route::prefix('major')->group(function () {
     Route::get('/create', [MajorController::class, 'create'])->name('create.major');
     Route::get('/edit/{id}', [MajorController::class, 'edit'])->name('edit.major');
     Route::get('/show/{id}', [MajorController::class, 'show'])->name('show.major');
-    
+
     Route::post('/store', [MajorController::class, 'store'])->name('store.major');
     Route::put('/update/{id}', [MajorController::class, 'update'])->name('update.major');
     Route::delete('/destroy/{id}', [MajorController::class, 'destroy'])->name('destroy.major');
@@ -179,7 +196,7 @@ Route::prefix('field')->group(function () {
     Route::get('/create', [FieldController::class, 'create'])->name('create.field');
     Route::get('/edit/{id}', [FieldController::class, 'edit'])->name('edit.field');
     Route::get('/show/{id}', [FieldController::class, 'show'])->name('show.field');
-    
+
     Route::post('/store', [FieldController::class, 'store'])->name('store.field');
     Route::put('/update/{id}', [FieldController::class, 'update'])->name('update.field');
     Route::delete('/destroy/{id}', [FieldController::class, 'destroy'])->name('destroy.field');
@@ -192,7 +209,7 @@ Route::prefix('market')->group(function () {
     Route::get('/create', [MarketController::class, 'create'])->name('create.market');
     Route::get('/edit/{id}', [MarketController::class, 'edit'])->name('edit.market');
     Route::get('/show/{id}', [MarketController::class, 'show'])->name('show.market');
-    
+
     Route::post('/store', [MarketController::class, 'store'])->name('store.market');
     Route::put('/update/{id}', [MarketController::class, 'update'])->name('update.market');
     Route::delete('/destroy/{id}', [MarketController::class, 'destroy'])->name('destroy.market');
@@ -204,7 +221,7 @@ Route::prefix('target_customer')->group(function () {
     Route::get('/create', [TargetCustomerController::class, 'create'])->name('create.target_customer');
     Route::get('/edit/{id}', [TargetCustomerController::class, 'edit'])->name('edit.target_customer');
     Route::get('/show/{id}', [TargetCustomerController::class, 'show'])->name('show.target_customer');
-    
+
     Route::post('/store', [TargetCustomerController::class, 'store'])->name('store.target_customer');
     Route::put('/update/{id}', [TargetCustomerController::class, 'update'])->name('update.target_customer');
     Route::delete('/destroy/{id}', [TargetCustomerController::class, 'destroy'])->name('destroy.target_customer');
@@ -216,7 +233,7 @@ Route::prefix('certificate')->group(function () {
     Route::get('/create', [CertificateController::class, 'create'])->name('create.certificate');
     Route::get('/edit/{id}', [CertificateController::class, 'edit'])->name('edit.certificate');
     Route::get('/show/{id}', [CertificateController::class, 'show'])->name('show.certificate');
-    
+
     Route::post('/store', [CertificateController::class, 'store'])->name('store.certificate');
     Route::put('/update/{id}', [CertificateController::class, 'update'])->name('update.certificate');
     Route::delete('/destroy/{id}', [CertificateController::class, 'destroy'])->name('destroy.certificate');
@@ -228,7 +245,7 @@ Route::prefix('organization')->group(function () {
     Route::get('/create', [OrganizationController::class, 'create'])->name('create.organization');
     Route::get('/edit/{id}', [OrganizationController::class, 'edit'])->name('edit.organization');
     Route::get('/show/{id}', [OrganizationController::class, 'show'])->name('show.organization');
-    
+
     Route::post('/store', [OrganizationController::class, 'store'])->name('store.organization');
     Route::put('/update/{id}', [OrganizationController::class, 'update'])->name('update.organization');
     Route::delete('/destroy/{id}', [OrganizationController::class, 'destroy'])->name('destroy.organization');
@@ -240,7 +257,7 @@ Route::prefix('business')->group(function () {
     Route::get('/create', [BusinessController::class, 'create'])->name('create.business');
     Route::get('/edit/{id}', [BusinessController::class, 'edit'])->name('edit.business');
     Route::get('/show/{id}', [BusinessController::class, 'show'])->name('show.business');
-    
+
     Route::post('/store', [BusinessController::class, 'store'])->name('store.business');
     Route::put('/update/{id}', [BusinessController::class, 'update'])->name('update.business');
     Route::delete('/destroy/{id}', [BusinessController::class, 'destroy'])->name('destroy.business');
@@ -252,7 +269,7 @@ Route::prefix('membership-level')->group(function () {
     Route::get('/create', [MemLevelController::class, 'create'])->name('create.membership_level');
     Route::get('/edit/{id}', [MemLevelController::class, 'edit'])->name('edit.membership_level');
     Route::get('/show/{id}', [MemLevelController::class, 'show'])->name('show.membership_level');
-    
+
     Route::post('/store', [MemLevelController::class, 'store'])->name('store.membership_level');
     Route::put('/update/{id}', [MemLevelController::class, 'update'])->name('update.membership_level');
     Route::delete('/destroy/{id}', [MemLevelController::class, 'destroy'])->name('destroy.membership_level');
@@ -264,7 +281,7 @@ Route::prefix('club')->group(function () {
     Route::get('/create', [ClubController::class, 'create'])->name('create.club');
     Route::get('/edit/{id}', [ClubController::class, 'edit'])->name('edit.club');
     Route::get('/show/{id}', [ClubController::class, 'show'])->name('show.club');
-    
+
     Route::post('/store', [ClubController::class, 'store'])->name('store.club');
     Route::put('/update/{id}', [ClubController::class, 'update'])->name('update.club');
     Route::delete('/destroy/{id}', [ClubController::class, 'destroy'])->name('destroy.club');

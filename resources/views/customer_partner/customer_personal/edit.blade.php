@@ -17,19 +17,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        @if ($errors->any() || session('error'))
-            <div class="card-body">
-                <div class="alert alert-danger">
-                    <p class="font-weight-bold">Errors:</p>
-                    @foreach ($errors->all() as $error)
-                        <p class="mb-0">{{ $error }}</p>
-                    @endforeach
-                    @if (session('error'))
-                        <p class="mb-0">{{ session('error') }}</p>
-                    @endif
-                </div>
-            </div>
-        @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -237,9 +224,10 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary  mr-2">Chỉnh sửa</button>
+                                    <a class="btn btn-secondary" href="{{route('index.customer_personal')}}">Đóng</a>
+                                </div>>
                             </form>
                         </div>
                         <!-- /.card -->
