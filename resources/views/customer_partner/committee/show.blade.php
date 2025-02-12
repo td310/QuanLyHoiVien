@@ -5,10 +5,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách khách hàng</h1>
+                        <h1 class="title-alta">Chi tiết ban chấp hành</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('index.customer_partner') }}">Ban chấp hành</a></li>
                             <li class="breadcrumb-item active">Chi Tiết</li>
                         </ol>
@@ -23,9 +24,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chi tiết ban chấp hành</h3>
-                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="card col-md-6">

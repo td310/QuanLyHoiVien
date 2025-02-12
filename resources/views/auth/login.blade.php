@@ -50,9 +50,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                 </form>
-                <p class="mb-0 text-right">
-                    <a href="{{ route('register') }}" class="text-center">Đăng ký tài khoản</a>
-                </p>
             </div>
             <!-- /.login-card-body -->
         </div>

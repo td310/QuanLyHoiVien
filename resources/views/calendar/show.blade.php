@@ -5,12 +5,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="title-alta">Danh sách thông báo</h1>
+                        <h1 class="title-alta">Chi tiết thông báo</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('index.notification') }}">Thông báo</a></li>
-                            <li class="breadcrumb-item active">Thêm mới</li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index.calendar') }}">Lịch họp</a></li>
+                            <li class="breadcrumb-item active">Chi tiết</li>
                         </ol>
                     </div>
                 </div>
@@ -24,7 +25,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Thêm thông báo mới</h3>
+                                <h3 class="card-title">Chi tiết thông báo</h3>
                             </div>
                             <!-- /.card-header -->
                             <form action="" method="POST">

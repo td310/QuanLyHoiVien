@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Câu lạc bộ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('index.club')}}">Câu lạc bộ</a></li>
                             <li class="breadcrumb-item active">Chỉnh sửa</li>
                         </ol>
                     </div>
@@ -23,9 +24,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chỉnh sửa lạc bộ</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{ route('update.club', $club->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf

@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách khách hàng</h1>
+                        <h1 class="title-alta">Thêm mới khách hàng doanh nghiệp</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -25,9 +25,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Tạo mới khách hàng doanh nghiệp</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{ route('store.customer_corporate') }}" method="POST">
                                 @csrf

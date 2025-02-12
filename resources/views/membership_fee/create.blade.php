@@ -5,49 +5,24 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách khách hàng</h1>
+                        <h1 class="title-alta">Thêm mới hội phí</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Hội phí</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index.membership_fee') }}">Hội phí</a></li>
                             <li class="breadcrumb-item active">Thêm mới</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-                @if ($errors->any() || session('error'))
-        <div class="card-body">
-            <div class="alert alert-danger">
-                <p class="font-weight-bold">Errors:</p>
-                @foreach ($errors->all() as $error)
-                    <p class="mb-0">{{ $error }}</p>
-                @endforeach
-                @if(session('error'))
-                    <p class="mb-0">{{ session('error') }}</p>
-                @endif
-            </div>
-        </div>
-    @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-12">
-                        <!-- general form elements -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @elseif(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Thêm hội phí</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{ route('membership_fee.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -58,7 +33,8 @@
                                                 <div class="row align-items-center mb-2">
                                                     <label class="col-sm-4 col-form-label">Loại khách hàng</label>
                                                     <div class="col-sm-8">
-                                                        <select class="form-control" id="customer_type" name="customer_type">
+                                                        <select class="form-control" id="customer_type"
+                                                            name="customer_type">
                                                             <option value="">Chọn loại khách hàng</option>
                                                             <option value="committee">Ban chấp hành</option>
                                                             <option value="corporate">Khách hàng doanh nghiệp</option>

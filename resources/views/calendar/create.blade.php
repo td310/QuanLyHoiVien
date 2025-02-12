@@ -9,6 +9,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('index.calendar') }}">Lịch họp</a></li>
                             <li class="breadcrumb-item active">Thêm mới</li>
                         </ol>
@@ -24,9 +25,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Thêm lịch họp mới</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{ route('store.calendar') }}" method="POST">
                                 @csrf

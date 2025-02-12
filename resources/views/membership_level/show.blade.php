@@ -5,11 +5,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách hạng thành viên</h1>
+                        <h1 class="title-alta">Chi tiết hạng thành viên</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Hạng thành viên</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('index.membership_level')}}">Hạng thành viên</a></li>
                             <li class="breadcrumb-item active">Chi tiết</li>
                         </ol>
                     </div>
@@ -21,10 +22,7 @@
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chi tiết hạng thành viên</h3>
-                            </div>
+                        <div class="card">>
                             <form action="" method="POST">
                                 @csrf
                                 <div class="card-body">

@@ -6,11 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách câu lạc bộ</h1>
+                        <h1 class="title-alta">Thêm mới vai trò</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Câu lạc bộ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('index.role')}}">Vai trò</a></li>
                             <li class="breadcrumb-item active">Thêm mới</li>
                         </ol>
                     </div>
@@ -24,16 +25,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Thêm vai trò</h3>
-                            </div>
-                            @if ($errors->any())
-                                <div class="card-body">
-                                    @foreach ($errors->all() as $error)
-                                        <p class="text-danger">{{ $error }}</p>
-                                    @endforeach
-                                </div>
-                            @endif
                             <form action="{{route('store.role')}}" method="POST">
                                 @csrf
                                 <div class="card-body">

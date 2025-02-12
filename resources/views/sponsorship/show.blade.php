@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Hội Phí</h1>
+                        <h1 class="title-alta">Chi tiết tài trợ</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -24,9 +24,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chi tiết tài trợ</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{ route('store.sponsorship') }}" method="POST" enctype="multipart/form-data">
                                 @csrf

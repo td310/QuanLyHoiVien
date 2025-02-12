@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="">Câu lạc bộ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index.club') }}">Câu lạc bộ</a></li>
                             <li class="breadcrumb-item active">Chi tiết</li>
                         </ol>
                     </div>
@@ -23,9 +24,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chi tiết câu lạc bộ</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{ route('store.club') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -70,7 +68,7 @@
                                                         <label class="col-sm-5 col-form-label">Tên viết tắt</label>
                                                         <div class="col-sm-7">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $club->club_name_acronym }}" readonly> 
+                                                                value="{{ $club->club_name_acronym }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,7 +159,8 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Ngành</label>
                                                         <div class="col-sm-7">
-                                                            <input type="text" class="form-control" value="{{ $club->major->major_name }}" readonly>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $club->major->major_name }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,7 +168,8 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Lĩnh vực</label>
                                                         <div class="col-sm-7">
-                                                            <input type="text" class="form-control" value="{{ $club->field->field_name }}" readonly>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $club->field->field_name }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -183,7 +183,8 @@
                                                     <div class="row align-items-center mb-2">
                                                         <label class="col-sm-5 col-form-label">Thị trường</label>
                                                         <div class="col-sm-7">
-                                                            <input type="text" class="form-control" value="{{ $club->market->market_name }}" readonly>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $club->market->market_name }}" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,14 +195,16 @@
                                                     <h3 class="card-title">4. Phụ trách kết nối</h3>
                                                 </div>
                                                 <div id="managers-container">
-                                                    @foreach($club->connectionManagers as $key => $manager)
-                                                        <div class="manager-group" id="manager-{{$key}}">
+                                                    @foreach ($club->connectionManagers as $key => $manager)
+                                                        <div class="manager-group" id="manager-{{ $key }}">
                                                             <div class="form-group">
                                                                 <div class="row align-items-center mb-2">
-                                                                    <label class="col-sm-5 col-form-label">Họ và tên</label>
+                                                                    <label class="col-sm-5 col-form-label">Họ và
+                                                                        tên</label>
                                                                     <div class="col-sm-7">
-                                                                        <input type="text" class="form-control" 
-                                                                            value="{{ $manager->connection_manager_name }}" readonly>
+                                                                        <input type="text" class="form-control"
+                                                                            value="{{ $manager->connection_manager_name }}"
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -209,33 +212,39 @@
                                                                 <div class="row align-items-center mb-2">
                                                                     <label class="col-sm-5 col-form-label">Chức vụ</label>
                                                                     <div class="col-sm-7">
-                                                                        <input type="text" class="form-control" 
+                                                                        <input type="text" class="form-control"
                                                                             value="{{ $manager->position }}" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="row align-items-center mb-2">
-                                                                    <label class="col-sm-5 col-form-label">Số điện thoại</label>
+                                                                    <label class="col-sm-5 col-form-label">Số điện
+                                                                        thoại</label>
                                                                     <div class="col-sm-7">
-                                                                        <input type="text" class="form-control" 
+                                                                        <input type="text" class="form-control"
                                                                             value="{{ $manager->phone }}" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="row align-items-center mb-2">
-                                                                    <label class="col-sm-5 col-form-label">Giới tính</label>
+                                                                    <label class="col-sm-5 col-form-label">Giới
+                                                                        tính</label>
                                                                     <div class="col-sm-7">
                                                                         <div class="d-flex align-items-center gap-3">
                                                                             <div class="form-check">
-                                                                                <input type="radio" class="form-check-input" 
-                                                                                    {{ $manager->gender == 'male' ? 'checked' : '' }} disabled>
+                                                                                <input type="radio"
+                                                                                    class="form-check-input"
+                                                                                    {{ $manager->gender == 'male' ? 'checked' : '' }}
+                                                                                    disabled>
                                                                                 <label class="form-check-label">Nam</label>
                                                                             </div>
                                                                             <div class="form-check">
-                                                                                <input type="radio" class="form-check-input"
-                                                                                    {{ $manager->gender == 'female' ? 'checked' : '' }} disabled>
+                                                                                <input type="radio"
+                                                                                    class="form-check-input"
+                                                                                    {{ $manager->gender == 'female' ? 'checked' : '' }}
+                                                                                    disabled>
                                                                                 <label class="form-check-label">Nữ</label>
                                                                             </div>
                                                                         </div>
@@ -246,13 +255,14 @@
                                                                 <div class="row align-items-center mb-2">
                                                                     <label class="col-sm-5 col-form-label">Email</label>
                                                                     <div class="col-sm-7">
-                                                                        <input type="email" class="form-control" 
-                                                                            value="{{ $manager->email_connection }}" readonly>
+                                                                        <input type="email" class="form-control"
+                                                                            value="{{ $manager->email_connection }}"
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @if(!$loop->last)
+                                                        @if (!$loop->last)
                                                             <hr>
                                                         @endif
                                                     @endforeach
@@ -263,7 +273,8 @@
                                 </div>
 
                                 <div class="card-footer d-flex justify-content-center">
-                                    <a href="{{ route('edit.club', $club->id) }}" class="btn btn-primary mr-2">Chỉnh sửa</a>
+                                    <a href="{{ route('edit.club', $club->id) }}" class="btn btn-primary mr-2">Chỉnh
+                                        sửa</a>
                                     <a class="btn btn-secondary  mr-2" href="{{ route('index.club') }}">Đóng</a>
                                 </div>
                             </form>

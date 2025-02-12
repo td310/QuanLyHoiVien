@@ -5,10 +5,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách khách hàng</h1>
+                        <h1 class="title-alta">Thêm mới khách hàng cá nhân</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('index.customer_partner') }}">Khách hàng cá nhân</a>
                             </li>
                             <li class="breadcrumb-item active">Thêm mới</li>
@@ -17,19 +18,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        @if ($errors->any() || session('error'))
-            <div class="card-body">
-                <div class="alert alert-danger">
-                    <p class="font-weight-bold">Errors:</p>
-                    @foreach ($errors->all() as $error)
-                        <p class="mb-0">{{ $error }}</p>
-                    @endforeach
-                    @if (session('error'))
-                        <p class="mb-0">{{ session('error') }}</p>
-                    @endif
-                </div>
-            </div>
-        @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -37,9 +25,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Thêm mới khách hàng cá nhân</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="{{route('store.customer_personal')}}" method="POST">
                                 @csrf

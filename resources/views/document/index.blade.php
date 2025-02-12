@@ -14,7 +14,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-12 d-flex justify-content-end">
-                        <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+                        <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data"
+                            id="uploadForm">
                             @csrf
                             <button type="button" class="btn btn-success btn-sm" id="uploadBtn">
                                 <i class="fas fa-plus"></i> Thêm tài liệu lưu trữ
@@ -22,7 +23,7 @@
                             <input type="file" name="document" id="uploadFile" style="display: none">
                         </form>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -54,7 +55,8 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $document->name }}</td>
-                                                <td>{{ \App\Helpers\FileHelper::getMimeTypeExtension($document->getFirstMedia('documents')->mime_type ?? 'Không xác định') }}</td>
+                                                <td>{{ \App\Helpers\FileHelper::getMimeTypeExtension($document->getFirstMedia('documents')->mime_type ?? 'Không xác định') }}
+                                                </td>
                                                 </td>
                                                 <td>
                                                     @if ($document->getFirstMedia('documents'))
@@ -65,11 +67,11 @@
                                                     @endif
 
                                                     <form action="{{ route('documents.destroy', $document->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('Bạn có chắc muốn xoá?');">
+                                                        method="POST" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            data-toggle="modal" data-target="#deleteModal">
                                                             <i class="fas fa-trash"></i> Xóa
                                                         </button>
                                                     </form>
@@ -95,12 +97,12 @@
             const uploadBtn = document.querySelector('#uploadBtn');
             const uploadFile = document.querySelector('#uploadFile');
             const uploadForm = document.querySelector('#uploadForm');
-        
+
             if (uploadBtn && uploadFile && uploadForm) {
                 uploadBtn.addEventListener('click', function() {
                     uploadFile.click();
                 });
-        
+
                 uploadFile.addEventListener('change', function() {
                     if (this.files.length > 0) {
                         uploadForm.submit();
@@ -108,5 +110,5 @@
                 });
             }
         });
-        </script>
+    </script>
 @endsection

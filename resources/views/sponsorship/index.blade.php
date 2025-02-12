@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách tài trợ</h1>
+                        <h1 class="title-alta">Danh sách tài trợ</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -98,7 +98,7 @@
                                                 <td>{{ $sponsorship->date }}</td>
                                                 <td>
                                                     <a href="{{ route('show.sponsorship', $sponsorship->id) }}"
-                                                        class="btn btn-info btn-sm">Chi tiết</a>
+                                                        class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                                     <form action="{{ route('delete.sponsorship', $sponsorship->id) }}"
                                                         method="POST" class="d-inline"
                                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">

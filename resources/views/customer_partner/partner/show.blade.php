@@ -5,10 +5,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Danh sách khách hàng</h1>
+                        <h1 class="title-alta">Chi tiết đối tác doanh nghiệp</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('main_index') }}">Trang chủ</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('index.partner') }}">Đối tác doanh nghiệp</a>
                             </li>
                             <li class="breadcrumb-item active">Chi tiết</li>
@@ -24,9 +25,6 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Chi tiết đối tác doanh nghiệp</h3>
-                            </div>
                             <!-- /.card-header -->
                             <form action="" method="POST">
                                 <div class="card-body">

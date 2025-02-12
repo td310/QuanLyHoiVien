@@ -121,7 +121,7 @@
                                                         </form>
                                                     @endif
                                                     <a href="{{ route('show.membership_fee', $memFee->id) }}"
-                                                        class="btn btn-info btn-sm">Chi tiết</a>
+                                                        class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                                     <form action="{{ route('delete.membership_fee', $memFee->id) }}"
                                                         method="POST" class="d-inline"
                                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">

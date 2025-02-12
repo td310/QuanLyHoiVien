@@ -46,7 +46,71 @@
         min-height: 4rem;
         border-bottom: 1px solid #4f5962;
     }
+
+    .modal-content {
+            border-radius: 10px;
+            border: none;
+        }
+        .modal-header {
+            background-color: #ff7c1a;
+            color: white;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            justify-content: center;
+        }
+        .modal-header .icon {
+            font-size: 40px;
+        }
+        .modal-body {
+            text-align: center;
+            font-size: 18px;
+        }
+        .modal-footer {
+            justify-content: center;
+        }
+        .btn-cancel {
+            border: 2px solid #ff7c1a;
+            color: #ff7c1a;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .btn-cancel:hover {
+            background-color: #ff7c1a;
+            color: white;
+        }
+        .btn-confirm {
+            background-color: #ff7c1a;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .btn-confirm:hover {
+            background-color: #e66900;
+        }
 </style>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white d-flex justify-content-center">
+                <i class="bi bi-exclamation-triangle-fill text-white" style="font-size: 100px;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <p class="font-weight-bold">Bạn chắc chắn muốn đăng xuất khỏi hệ thống?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('logout-form').submit();">
+                    Đồng ý
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -60,15 +124,7 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('main_index') }}" class="nav-link">Trang chủ</a>
-                </li>
-            </ul>
+
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -77,15 +133,18 @@
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 @else
-                <li class="nav-item d-flex align-items-center">
-                    <img src="{{ Auth::user()->getFirstMediaUrl('avatar') ? Auth::user()->getFirstMediaUrl('avatar') : asset('dist/img/avatar.png') }}" 
-                         class="img-circle" 
-                         alt="User Image" 
-                         style="width: 30px; height: 30px; object-fit: cover;">
-                    <a class="nav-link" href="{{ route('profile') }}">
-                        {{ Auth::user()->name }}
-                    </a>
-                </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <img src="{{ Auth::user()->getFirstMediaUrl('avatar') ? Auth::user()->getFirstMediaUrl('avatar') : asset('dist/img/avatar.png') }}"
+                            class="img-circle" alt="User Image" style="width: 30px; height: 30px; object-fit: cover;">
+                        <a class="nav-link" href="{{ route('profile') }}">
+                            {{ Auth::user()->name }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link btn btn-link" data-toggle="modal" data-target="#logoutModal">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </button>
+                    </li>
                 @endguest
             </ul>
         </nav>
@@ -286,10 +345,21 @@
     </script>
 
     @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show position-fixed"
+            style="top: 20px; right: 20px; min-width: 300px; z-index: 1050;" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <script>
-            alert('{{ session('success') }}');
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 3000);
         </script>
     @endif
+
 
     @yield('script')
 </body>
