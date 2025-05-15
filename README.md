@@ -28,9 +28,3 @@
 ---
 <h2 align="left">Database</h2>
 <p align="left"> https://drive.google.com/file/d/1hsa6EmTlHrGgnTRRpoiwvJdj8QWc2FU3/view?usp=sharing</p>
-You can access the source code here: [https://github.com/td310/QuanLyHoiVien](https://github.com/td310/QuanLyHoiVien)
-
----
-
-Feel free to reach out if you need more information or support.
-
