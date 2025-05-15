@@ -18,7 +18,7 @@
 
 ---
 
-## 🚀 Technologies Used
+## Technologies Used
 
 * **Backend**: Laravel (PHP Framework)
 * **Frontend**: Blade Template, Bootstrap
