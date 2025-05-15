@@ -6,17 +6,36 @@
 
 ## Key Features
 
-* **Member Management**: Add, edit, and delete member information including name, birthdate, gender, address, phone number, email, etc.
+- **Member Management**:
+  - Create, update, delete, and view member information (name, date of birth, address, email, etc.).
+  - Categorize members by membership types (e.g., regular, VIP).
+- **Membership Type Management**:
+  - Manage membership categories (add, edit, delete).
+  - Assign membership types to members.
+- **Event/Activity Management**:
+  - Organize and manage events/activities (name, date, location, etc.).
+  - View detailed event lists and schedules.
+- **Participation Tracking**:
+  - Record and manage member participation in events.
+  - Track individual member activity history.
+- **Search and Filter**:
+  - Search members by name, email, or other criteria.
+  - Filter members and events based on specific conditions (e.g., membership type, event date).
+- **User-Friendly Interface**:
+  - Responsive design with Bootstrap for seamless use on desktop and mobile.
+  - Paginated lists for easy navigation through large datasets.
+- **Data Management**:
+  - Data storage using MySQL.
+  - Migration support for schema database management.
+## Screenshots
+### Trang chủ
+![1](https://github.com/user-attachments/assets/32453e7d-8c8a-4fb4-ac49-745703bfd6ea)
 
-* **Member Categorization**: Organize members into groups, branches, or regions for easier management and searching.
+### Quản lý Khách hàng & Đối tác
+![2](https://github.com/user-attachments/assets/10bcee08-344e-4432-96df-f4bf84b453df)
 
-* **Activity Tracking**: Record and monitor member activities such as event participation, contributions, awards, and more.
-
-* **Reports and Statistics**: Aggregate data on members, activities, and contributions to support informed decision-making.
-
-* **User Role Management**: Assign roles with different permission levels such as admin, staff, etc.
-
----
+### Quản lý Lịch họp
+![3](https://github.com/user-attachments/assets/a40377d0-31e9-4b04-843e-d921ac675165)
 
 ## Technologies Used
 
